@@ -1,0 +1,131 @@
+<div class="full-container" [ngClass]="{ 'signup-mode': isSignUpMode }">
+ 
+<!-- Bouton de fermeture visible uniquement si dans un MatDialog -->
+<button *ngIf="isInDialog" mat-button (click)="close()" class="close-button">
+  <mat-icon>close</mat-icon>
+</button>
+
+   <!-- FORMULAIRE CONNEXION -->
+  <div class="half left-side" *ngIf="!isSignUpMode">
+    <mat-card>
+      <mat-card-title>Connexion</mat-card-title>
+      <mat-card-content>
+        <!-- Bouton de fermeture -->
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" required />
+            <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              Email invalide
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="motdepasse" required />
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('motdepasse')?.invalid && loginForm.get('motdepasse')?.touched">
+              Mot de passe invalide
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="full-width">
+            Se connecter
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- FORMULAIRE INSCRIPTION -->
+  <div class="half left-side" *ngIf="isSignUpMode">
+    <mat-card>
+      <mat-card-title>Inscription</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="singupForm" (ngSubmit)="onRegister()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nom</mat-label>
+            <input matInput formControlName="nom" />
+            <div *ngIf="singupForm.get('nom')?.invalid && singupForm.get('nom')?.touched">
+              <small style="color: rgb(199, 16, 16);">Nom doit contenir au moins 3 lettres.</small>
+            </div>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Adresse</mat-label>
+            <input matInput formControlName="adresse" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Téléphone</mat-label>
+            <input matInput formControlName="telephone" />
+            <div *ngIf="singupForm.get('telephone')?.invalid && singupForm.get('telephone')?.touched">
+              <small style="color: rgb(199, 16, 16);">Numéro doit contenir au moins 8 chiffres.</small>
+            </div>
+          
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="xyz@gmail.com"/>
+            <div *ngIf="singupForm.get('email')?.invalid && singupForm.get('email')?.touched">
+              <small style="color: rgb(199, 16, 16);">Email doit être valide .</small>
+            </div>
+          </mat-form-field>
+
+          <mat-radio-group formControlName="sexe" class="radio-group">
+            <mat-radio-button value="Homme">Homme</mat-radio-button>
+            <mat-radio-button value="Femme">Femme</mat-radio-button>
+          </mat-radio-group>
+
+          <mat-form-field appearance="outline" class="full-width">
+  <mat-label>Mot de passe</mat-label>
+  <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="motdepasse"
+         placeholder="Doit contenir plusieurs caractères" />
+  <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+  </button>
+  <div *ngIf="singupForm.get('motdepasse')?.invalid && singupForm.get('motdepasse')?.touched">
+    <small style="color: rgb(199, 16, 16);">
+      Mot de passe doit contenir chiffres et lettres (min. 6 caractères).
+    </small>
+  </div>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Confirmer mot de passe</mat-label>
+  <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPassword"
+         placeholder="Taper le même mot de passe" />
+  <div *ngIf="singupForm.hasError('mismatch') && singupForm.get('confirmPassword')?.touched">
+    <small style="color: rgb(199, 16, 16);">
+      Les mots de passe ne correspondent pas.
+    </small>
+  </div>
+</mat-form-field>
+
+<button mat-raised-button color="primary" type="submit"
+        [disabled]="singupForm.invalid" class="full-width">
+  S'inscrire
+</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- PANNEAU DROIT FIXE -->
+  <div class="half right-side">
+    <div class="overlay-panel" *ngIf="!isSignUpMode">
+      <h1>Nouveau ici ?</h1>
+      <p>Créez un compte pour découvrir nos services personnalisés.</p>
+      <button class="ghost" (click)="toggleForm(true)">S'inscrire</button>
+    </div>
+    <div class="overlay-panel" *ngIf="isSignUpMode">
+      <h1>Déjà membre ?</h1>
+      <p>Connectez-vous à votre espace personnel.</p>
+      <button class="ghost" (click)="toggleForm(false)">Connexion</button>
+    </div>
+  </div>
+</div>

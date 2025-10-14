@@ -1,0 +1,44 @@
+<ng-container *ngIf="demandes.length > 0; else emptyCart">
+  <mat-card class="cart-card">
+    <mat-card-title>Votre Demande</mat-card-title>
+    <mat-card-content>
+
+      <div class="cart-item" *ngFor="let demande of demandes">
+        <div class="product-info">
+          <img class="product-image" [src]="demande.processedImg" alt="Product Image" />
+          <div class="product-details">
+            <h2 class="product-name" [routerLink]="['/customer/service', demande.serviceId]">
+              {{ demande.serviceName }}
+            </h2>
+            <p class="product-description">{{ demande.serviceDescription }}</p>
+
+            <div class="info-row">
+              <span class="info-label">Catégorie :</span>
+              <span class="info-value">{{ demande.categoryName }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="remove-button">
+          <button mat-icon-button color="warn" (click)="removeItem(demande.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          
+        </div>
+      </div>
+
+      <div class="order-actions mt-4">
+        <button mat-raised-button color="warn" (click)="clearCart()">🧹 Vider la Demande</button>
+        <button mat-raised-button color="accent" (click)="placeOrder()">🛒 Demander</button>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-template #emptyCart>
+  <div class="empty-cart">
+    <mat-icon class="icon">remove_shopping_cart</mat-icon>
+    <span>Aucune Demande Ajoutée</span>
+  </div>
+</ng-template>

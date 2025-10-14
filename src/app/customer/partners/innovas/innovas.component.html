@@ -1,0 +1,43 @@
+<div class="innovas-page container py-5">
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logoinnovass.webp" alt="Logo Innovas" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Innovas - Solutions Digitales</h2>
+      <p class="cheers-description">
+        En partenariat avec Innovas, nous avons imaginé une stratégie visuelle unique, associant modernité,
+        technologie et communication engageante. Nos affiches et contenus digitaux ont permis à Innovas
+        de consolider son image de marque dans un environnement compétitif.
+      </p>
+    </div>
+  
+    <section class="cheers-section">
+      <h2 class="cheers-title">Design Graphique</h2>
+      <div class="cheers-gallery">
+        <img src="assets/partenaires/innovass/affiche1.webp" alt="Affiche 1" class="cheers-poster" />
+        <img src="assets/partenaires/innovass/affiche2.webp" alt="Affiche 2" class="cheers-poster" />
+        <img src="assets/partenaires/innovass/affiche3.webp" alt="Affiche 3" class="cheers-poster" />
+        <img src="assets/partenaires/innovass/affiche4.webp" alt="Affiche 4" class="cheers-poster" />
+        <img src="assets/partenaires/innovass/affiche3.webp" alt="Affiche 3" class="cheers-poster" />
+        <img src="assets/partenaires/innovass/affiche3.webp" alt="Affiche 3" class="cheers-poster" />
+      </div>
+      <div id="lightbox" class="lightbox" *ngIf="showLightbox" (click)="closeLightbox()">
+        <img [src]="lightboxImage" alt="image agrandie">
+      </div>
+    </section>
+  
+    <section class="cheers-section">
+      <h2 class="cheers-title">Création de contenu</h2>
+      <div class="cheers-reel-container">
+        <video class="cheers-reel" controls muted loop>
+          <source src="assets/partenaires/innovass/videoinnovass.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+      </div>
+    </section>
+  
+    <div class="back-to-clients">
+      <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+        <i class="fas fa-arrow-left"></i> Retour aux clients
+      </a>
+    </div>
+  </div>
+  

@@ -1,0 +1,161 @@
+<div class="admin-wrapper" [class.sidebar-open]="showSidebar">
+  <div class="main-content">
+    <div class="form-container">
+      <h2>Modifier un Service</h2>
+
+      <form [formGroup]="productForm" (ngSubmit)="updateProduct()">
+        <!-- Type de service -->
+        <mat-card class="form-section">
+          <mat-card-header>
+            <mat-card-title>Type de Service</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-radio-group formControlName="afficherDans" class="radio-group">
+              <mat-radio-button value="prod" class="radio-button">
+                <mat-icon>shopping_basket</mat-icon> Produit
+              </mat-radio-button>
+              <mat-radio-button value="events" class="radio-button">
+                <mat-icon>event</mat-icon> Événement
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Image Upload -->
+        <mat-card class="form-section">
+          <mat-card-header>
+            <mat-card-title>Image du Service</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <label class="file-upload-label">
+              <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput hidden>
+              <mat-icon>cloud_upload</mat-icon>
+              <span>{{ file ? file.name : 'Choisir une image' }}</span>
+              <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+                Parcourir
+              </button>
+            </label>
+            
+            <div *ngIf="imagePreview || existingImage" class="image-preview-container">
+              <img [src]="imagePreview || existingImage" alt="Aperçu" class="image-preview">
+              <button mat-icon-button class="clear-image" (click)="file = null; imagePreview = null">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Informations de base -->
+        <mat-card class="form-section">
+          <mat-card-header>
+            <mat-card-title>Informations de Base</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Nom du Service</mat-label>
+              <input matInput formControlName="nom" required>
+              <mat-error *ngIf="productForm.get('nom')?.hasError('required')">
+                Ce champ est obligatoire
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description" rows="3" required></textarea>
+              <mat-error *ngIf="productForm.get('description')?.hasError('required')">
+                Ce champ est obligatoire
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Catégorie</mat-label>
+              <mat-select formControlName="categoryId" required>
+                <mat-option *ngFor="let category of filteredCategories" [value]="category.id">
+                  {{ category.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+
+         
+            
+            
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Section spécifique aux événements -->
+        <mat-card *ngIf="!isProdSelected" class="form-section">
+          <mat-card-header>
+            <mat-card-title>Détails de l'Événement</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Prix (DT)</mat-label>
+              <input matInput type="number" formControlName="prix" required min="0">
+              <mat-error *ngIf="productForm.get('prix')?.hasError('required')">
+                Le prix est obligatoire
+              </mat-error>
+              <mat-error *ngIf="productForm.get('prix')?.hasError('min')">
+                Le prix doit être supérieur ou égal à 0
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Prestataire</mat-label>
+              <mat-select formControlName="prestataireId" required>
+                <mat-option *ngFor="let p of prestataires" [value]="p.id">
+                  {{ p.nom }} ({{ p.email }})
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="productForm.get('prestataireId')?.hasError('required')">
+                Veuillez sélectionner un prestataire
+              </mat-error>
+            </mat-form-field>
+
+            <div class="date-time-section">
+              <h3>Dates Indisponibles</h3>
+              
+              <div class="date-time-inputs">
+                <mat-form-field appearance="outline" class="date-field">
+                  <mat-label>Date</mat-label>
+                  <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event.value)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="time-field">
+                  <mat-label>Heure</mat-label>
+                  <input matInput type="time" #timeInput>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" type="button" 
+                        (click)="addDateTime(timeInput)"
+                        [disabled]="!selectedDate || !timeInput.value">
+                  Ajouter
+                </button>
+              </div>
+
+              <mat-chip-list class="date-chips" *ngIf="unavailableDates.length > 0">
+                <mat-chip *ngFor="let dt of unavailableDates; let i = index" 
+                         (removed)="removeDate(i)" removable>
+                  {{ dt | date:'medium' }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Actions du formulaire -->
+        <div class="form-actions">
+          <button mat-stroked-button type="button" (click)="GoDashboard()">
+            Annuler
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+            Mettre à jour
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

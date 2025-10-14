@@ -1,0 +1,115 @@
+<div class="main-content">
+  
+  <!-- 🎯 Section Statistiques Tansik Prod -->
+  <h2 class="title">Statistiques Tansik Prod</h2>
+  <div class="order-status-container">
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">🟦</div>
+        <mat-card-title>En Attente</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ data?.recue || 0 }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">🟦</div>
+        <mat-card-title>Annulées</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ data?.annullee || 0 }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">🟦</div>
+        <mat-card-title>Acceptées</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ data?.acceptee || 0 }}</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- 🎯 Section Statistiques Tansik Events -->
+  <h2 class="title">Statistiques Tansik Events</h2>
+  <div class="order-status-container">
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">🟪</div>
+        <mat-card-title>En Attente</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ eventAnalytics?.recue || 0 }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">❌</div>
+        <mat-card-title>Annulées</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ eventAnalytics?.annullee || 0 }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">✅</div>
+        <mat-card-title>Acceptées</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ eventAnalytics?.acceptee || 0 }}</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- 🧾 Section Chiffres d'affaires Events -->
+  <div class="revenue-container">
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">💶</div>
+        <mat-card-title>Recette Mois Actuel</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ eventAnalytics?.currentMonthEarning | number }} TND</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">💵</div>
+        <mat-card-title>Recette Mois Précédent</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ eventAnalytics?.previousMonthEarning | number }} TND</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="order-status-card">
+      <mat-card-header>
+        <div mat-card-avatar class="status-avatar">💰</div>
+        <mat-card-title>Chiffre d'Affaires Annuel</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="status-value">{{ eventAnalytics?.totalYearEarning | number }} TND</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <h2 class="title">Histogramme des Recettes</h2>
+  <div>
+    <canvas baseChart
+            [data]="revenueChart"
+            [options]="chartOptions"
+            [type]="'bar'">
+    </canvas>
+  </div>
+  
+
+  
+</div>

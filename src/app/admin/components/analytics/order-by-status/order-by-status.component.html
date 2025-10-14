@@ -1,0 +1,31 @@
+<div class="order-status-container">
+  <mat-card class="order-status-card">
+    <mat-card-header>
+      <div mat-card-avatar class="status-avatar">E</div>
+      <mat-card-title>En Attente</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="status-value">{{ data?.recue || 0 }}</div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="order-status-card">
+    <mat-card-header>
+      <div mat-card-avatar class="status-avatar">A</div>
+      <mat-card-title>Annulées</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="status-value">{{ data?.annullee || 0 }}</div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="order-status-card">
+    <mat-card-header>
+      <div mat-card-avatar class="status-avatar">A</div>
+      <mat-card-title>Acceptées</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="status-value">{{ data?.acceptee || 0 }}</div>
+    </mat-card-content>
+  </mat-card>
+</div>

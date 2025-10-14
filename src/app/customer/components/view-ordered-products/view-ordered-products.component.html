@@ -1,0 +1,41 @@
+<div class="ordered_products-container">
+  <div class="ordered_products" *ngFor="let product of orderedProductDetailsList">
+    <div class="product-info">
+      <div class="product-image">
+        <img [src]="product.processedImg" alt="product-image" />
+      </div>
+
+      <div class="product-details">
+        <div class="item-row">
+          <div class="item-name">
+            {{ product.name }}
+          </div>
+
+          <div class="product-price">
+            Price: {{ product.price | currency }}
+          </div>
+
+          <div class="item-quantity">
+            Quantity: {{ product.quantity }}
+          </div>
+        </div>
+      </div>
+
+      <div class="action-button">
+        <button mat-raised-button color="primary"
+          [routerLink]="['/customer/review', product.id]">
+          Give Review
+        </button>
+      </div>
+    </div>
+
+    <div class="total-price">
+      Total: {{ product.total | currency }}
+    </div>
+  </div>
+
+  <!-- Optionnel : afficher le total global -->
+  <div class="global-total" style="text-align: right; font-weight: bold; margin-top: 1rem;">
+     Total De Commande: {{ totalAmount | currency }}
+  </div>
+</div>

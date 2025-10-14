@@ -1,0 +1,85 @@
+<div class="gestion-avis-container">
+
+  <!-- 🔵 Produit -->
+  <div *ngIf="prod && prod.nom" class="avis-wrapper">
+    <div class="left">
+      <img *ngIf="prod.processedImg" [src]="prod.processedImg" class="main-image" />
+    </div>
+    <div class="right">
+      <h2>{{ prod.nom }}</h2>
+      <p>{{ prod.description }}</p>
+      <p><strong>💰 Prix :</strong> {{ prod.prix }} TND</p>
+
+      <div *ngIf="reviews.length > 0" class="avis-section">
+        <h3>🗣️ Avis</h3>
+        <div *ngFor="let review of reviews" class="review-line">
+          <div>
+            <strong>{{ review.userName }}</strong>
+            <p>"{{ review.description }}"</p>
+          </div>
+          <div class="stars">
+            ⭐ {{ review.rating }}/5
+            <button *ngIf="isAdmin" mat-icon-button color="warn" (click)="deleteReview(review.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p *ngIf="reviews.length === 0" class="no-review">Aucun avis pour ce produit.</p>
+    </div>
+  </div>
+
+  <!-- 🟡 Événement -->
+  <div *ngIf="event && event.nom" class="avis-wrapper">
+    <div class="left">
+      <img *ngIf="event.processedImg" [src]="event.processedImg" class="main-image" />
+    </div>
+    <div class="right">
+      <h2>{{ event.nom }}</h2>
+      <p>{{ event.description }}</p>
+      <p><strong>💰 Prix :</strong> {{ event.prix }} TND</p>
+
+      <div *ngIf="reviews.length > 0" class="avis-section">
+        <h3>🗣️ Avis</h3>
+        <div *ngFor="let review of reviews" class="review-line">
+          <div>
+            <strong>{{ review.userName }}</strong>
+            <p>"{{ review.description }}"</p>
+          </div>
+          <div class="stars">
+            ⭐ {{ review.rating }}/5
+            <button *ngIf="isAdmin" mat-icon-button color="warn" (click)="deleteReview(review.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p *ngIf="reviews.length === 0" class="no-review">Aucun avis pour cet événement.</p>
+    </div>
+  </div>
+
+</div>
+<!-- 📸 Médias du produit -->
+<div *ngIf="medias.length > 0" class="media-gallery-section">
+  <h3>Médias associés</h3>
+  <div class="media-gallery">
+    <div *ngFor="let media of medias" class="media-card">
+      <img *ngIf="media.type === 'IMAGE'" [src]="'data:image/jpeg;base64,' + media.base64" />
+      <video *ngIf="media.type === 'VIDEO'" controls>
+        <source [src]="'data:video/mp4;base64,' + media.base64" type="video/mp4" />
+      </video>
+
+      <div class="status-radio" *ngIf="isAdmin">
+        <p><strong>Statut :</strong> {{ media.status }}</p>
+        <mat-radio-group [value]="media.status" (change)="updateMediaStatus(media.id, $event.value)">
+          <mat-radio-button [value]="'ACTIF'">Actif</mat-radio-button>
+          <mat-radio-button [value]="'ANNULE'">Inactif</mat-radio-button>
+        </mat-radio-group>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,146 @@
+/* TICKETS GRID */
+.tickets-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+/* Chaque Ticket (Coupon) */
+.ticket-card {
+  width: 100%;
+  max-width: 450px; /* ✅ Limiter largeur max */
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header du ticket */
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Badge - réduction */
+.badge {
+  background-color: #ff5252;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Body du ticket */
+.ticket-body p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Image du coupon */
+.copon-image {
+  margin-top: 1rem;
+  width: 100%;
+  max-height: 150px; /* ✅ Diminue la hauteur */
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Footer (actions) */
+.ticket-footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .ticket-card {
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+  }
+}
+/* Styles pour le conteneur du formulaire d'édition */
+.edit-form {
+  max-width: 600px; /* Limiter la largeur du formulaire */
+  margin: 0 auto; /* Centrer le formulaire */
+  padding: 20px; /* Espacement interne */
+}
+
+/* Styles pour le mat-card */
+mat-card {
+  border-radius: 12px; /* Coins arrondis */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Titre du mat-card */
+mat-card-title {
+  font-size: 1.5rem; /* Taille de la police */
+  color: #007bff; /* Couleur primaire */
+  margin-bottom: 1rem; /* Espacement en bas */
+}
+
+/* Styles pour le formulaire */
+.edit-form-grid {
+  display: flex;
+  flex-direction: column; /* Disposition en colonne */
+}
+
+/* Styles pour les champs de formulaire */
+.mat-form-field {
+  width: 100%; /* Champs pleine largeur */
+  margin-bottom: 15px; /* Espacement entre les champs */
+}
+
+/* Styles pour le champ de téléchargement de fichier */
+.file-upload {
+  margin-bottom: 15px; /* Espacement */
+}
+
+/* Styles pour l'aperçu de l'image */
+.preview-image {
+  max-width: 100%; /* Limiter la largeur de l'image */
+  height: auto; /* Conserver le ratio */
+  margin-top: 10px; /* Espacement au-dessus de l'image */
+  border-radius: 8px; /* Coins arrondis */
+}
+
+/* Styles pour les boutons d'action */
+.form-actions {
+  display: flex;
+  justify-content: space-between; /* Espacement entre les boutons */
+  margin-top: 20px; /* Espacement au-dessus des boutons */
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .edit-form {
+    padding: 15px; /* Réduire le padding sur mobile */
+  }
+
+  mat-card-title {
+    font-size: 1.3rem; /* Réduire la taille du titre sur mobile */
+  }
+
+  .mat-form-field {
+    margin-bottom: 10px; /* Réduire l'espacement entre les champs sur mobile */
+  }
+
+  .form-actions {
+    flex-direction: column; /* Empiler les boutons verticalement sur mobile */
+    gap: 10px; /* Espacement entre les boutons */
+  }
+}

@@ -1,0 +1,43 @@
+<div class="cheers-page container py-5">
+    <!-- Logo + Titre -->
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logocheers.webp" alt="Logo Cheers" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Cheers - Salon de Thé</h2>
+      <p class="cheers-description">
+        Grâce à notre collaboration avec Cheers, nous avons mis en valeur leur image de marque à travers des campagnes
+        créatives, un contenu visuel impactant et une stratégie digitale moderne.
+        <br />
+        L’objectif était clair : renforcer leur présence sur les réseaux sociaux, attirer de nouveaux clients et sublimer leur univers gourmand.
+      </p>
+    </div>
+<!-- ================= DESIGN GRAPHIQUE ================= -->
+<section class="cheers-section">
+    <h2 class="cheers-title">Design Graphique</h2>
+    <div class="cheers-gallery">
+      <img src="assets/partenaires/cheers/affiche1.webp" alt="Affiche 1" class="cheers-poster" />
+      <img src="assets/partenaires/cheers/affiche2.webp" alt="Affiche 2" class="cheers-poster" />
+      <img src="assets/partenaires/cheers/affiche3.webp" alt="Affiche 3" class="cheers-poster" />
+      <img src="assets/partenaires/cheers/affiche4.webp" alt="Affiche 4" class="cheers-poster" />
+      <img src="assets/partenaires/cheers/affiche4.webp" alt="Affiche 4" class="cheers-poster" />
+      <img src="assets/partenaires/cheers/affiche4.webp" alt="Affiche 4" class="cheers-poster" />
+    </div>
+    <div id="lightbox" class="lightbox" (click)="closeLightbox()" *ngIf="showLightbox">
+        <img [src]="lightboxImage" alt="image agrandie">
+      </div>
+  </section>
+  
+  <!-- ================= CREATION DE CONTENU ================= -->
+  <section class="cheers-section">
+    <h2 class="cheers-title">Création de contenu</h2>
+    <div class="cheers-reel-container">
+      <video class="cheers-reel" controls muted loop>
+        <source src="assets/partenaires/cheers/videocheers.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas les vidéos HTML5.
+      </video>
+    </div>
+  </section>
+  <div class="back-to-clients">
+    <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+      <i class="fas fa-arrow-left"></i> Retour aux clients
+    </a>
+  </div>

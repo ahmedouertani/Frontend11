@@ -1,0 +1,85 @@
+<div class="main-content">
+  <div class="add-category-container">
+    <h2 class="page-title">Ajouter une Catégorie</h2>
+
+    <!-- Formulaire -->
+    <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" class="category-form">
+      <!-- Nom -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="name" placeholder="Nom de la catégorie" />
+        <mat-error *ngIf="categoryForm.get('name')?.hasError('required')">
+          Champ requis
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" placeholder="Description" />
+        <mat-error *ngIf="categoryForm.get('description')?.hasError('required')">
+          Champ requis
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Icône -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Classe de l'icône FontAwesome</mat-label>
+        <input matInput formControlName="iconClass" placeholder="Ex: fas fa-print" (input)="updatePreviewIcon()">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Type de catégorie</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="prod">Tansik Prod</mat-option>
+          <mat-option value="events">Tansik Events</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Aperçu de l’icône -->
+      <div class="icon-preview-container">
+        <i [class]="categoryForm.get('iconClass')?.value" class="preview-icon"></i>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="icon-suggestions">
+        <button mat-stroked-button type="button" *ngFor="let icon of iconSuggestions" (click)="selectIcon(icon)">
+          <i [class]="icon"></i>
+        </button>
+      </div>
+
+      <!-- Submit -->
+      <div class="form-actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="categoryForm.invalid">
+          Ajouter
+        </button>
+      </div>
+    </form>
+  </div>
+
+    <!-- ✅ Liste des catégories -->
+  <div class="list-category-container">
+  <h2 class="page-title">Liste des Catégories</h2>
+  <mat-list>
+    <mat-list-item *ngFor="let cat of categories" class="category-item">
+
+      <!-- Icon aligned to the left -->
+      <i matListIcon [class]="cat.iconClass"></i>
+
+      <!-- Text content -->
+      <div matLine>
+        <span class="nametypecate"><b>{{ cat.name }}</b> /{{ cat.type }}</span>
+      </div>
+
+      <!-- Delete Button -->
+      <button mat-icon-button color="warn" (click)="deleteCategory(cat)">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </mat-list-item>
+  </mat-list>
+</div>
+
+
+
+</div>

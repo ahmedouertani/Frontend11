@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="container">
+      <img [src]="img || defaultImage" alt="Photo de profil" />
+      <h2>{{ nom }}</h2>
+      <small>{{ role }}</small>
+  
+      <div class="bar">
+        <button class="btn" routerLink="/customer/profile">
+          <i class="fas fa-pen"></i>
+          <span>Modifier Profile</span>
+        </button>
+        <button class="btn" routerLink="/customer/my-orders">
+          <i class="fas fa-list"></i>
+          <span>Réservations</span>
+        </button>
+        <button class="btn" routerLink="/customer/rendez-vous-client">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Rendez-vous</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  

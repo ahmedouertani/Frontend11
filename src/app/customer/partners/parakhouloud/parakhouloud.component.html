@@ -1,0 +1,38 @@
+<div class="cheers-page container py-5">
+    <!-- Logo + Titre -->
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logoparakhouloud.webp" alt="Logo Para Khouloud" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Para Khouloud - Parapharmacie & Bien-être</h2>
+      <p class="cheers-description">
+        Pour Para Khouloud, nous avons conçu une identité visuelle professionnelle et apaisante, à l'image de la confiance que l'on attend d'une parapharmacie.
+        <br />
+        Grâce à une stratégie graphique harmonieuse et des supports de communication adaptés, nous avons renforcé leur notoriété et facilité la connexion avec leur clientèle.
+      </p>
+    </div>
+  
+    <!-- ================= DESIGN GRAPHIQUE ================= -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Design Graphique</h2>
+      <div class="cheers-gallery">
+        <img src="assets/partenaires/parakhouloud/affiche1.webp" alt="Affiche 1" class="cheers-poster" (click)="openLightbox('assets/partenaires/parakhouloud/affiche1.webp')" />
+        <img src="assets/partenaires/parakhouloud/affiche2.webp" alt="Affiche 2" class="cheers-poster" (click)="openLightbox('assets/partenaires/parakhouloud/affiche2.webp')" />
+        <img src="assets/partenaires/parakhouloud/affiche3.webp" alt="Affiche 3" class="cheers-poster" (click)="openLightbox('assets/partenaires/parakhouloud/affiche3.webp')" />
+        <img src="assets/partenaires/parakhouloud/affiche4.webp" alt="Affiche 4" class="cheers-poster" (click)="openLightbox('assets/partenaires/parakhouloud/affiche4.webp')" />
+        <img src="assets/partenaires/parakhouloud/affiche2.webp" alt="Affiche 2" class="cheers-poster" (click)="openLightbox('assets/partenaires/parakhouloud/affiche2.webp')" />
+        <img src="assets/partenaires/parakhouloud/affiche3.webp" alt="Affiche 3" class="cheers-poster" (click)="openLightbox('assets/partenaires/parakhouloud/affiche3.webp')" />
+      </div>
+  
+      <!-- Lightbox -->
+      <div id="lightbox" class="lightbox" (click)="closeLightbox()" *ngIf="showLightbox">
+        <img [src]="lightboxImage" alt="image agrandie" />
+      </div>
+    </section>
+  
+    <!-- Retour -->
+    <div class="back-to-clients">
+      <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+        <i class="fas fa-arrow-left"></i> Retour aux clients
+      </a>
+    </div>
+  </div>
+  

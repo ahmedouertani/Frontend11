@@ -1,0 +1,120 @@
+/* Styles pour le conteneur principal */
+.full-container {
+  position: relative;
+  width: 100%; /* Prend toute la largeur */
+  max-width: 900px; /* Largeur maximale */
+  height: auto; /* Hauteur automatique */
+  margin: 40px auto; /* Centrer le conteneur */
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  display: flex; /* Utiliser flexbox pour la disposition */
+}
+
+/* Styles pour les côtés gauche et droit */
+.left-side,
+.right-side {
+  flex: 1; /* Prendre une part égale de l'espace */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Styles pour le côté gauche */
+.left-side {
+  background-color: transparent; /* Fond transparent */
+}
+
+/* Styles pour le côté droit */
+.right-side {
+  background: linear-gradient(to right, rgba(10, 116, 218, 0.8), rgba(50, 196, 255, 0.8)); /* Fond flou */
+  color: white;
+  text-align: center;
+}
+
+/* Styles pour les cartes de formulaire */
+mat-card {
+  width: 100%; /* Prendre toute la largeur */
+  max-width: 420px; /* Largeur maximale de la carte */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  backdrop-filter: blur(10px); /* Appliquer un flou au fond */
+  background: rgba(255, 255, 255, 0.8); /* Fond blanc avec transparence */
+}
+
+/* Styles pour les champs de formulaire */
+/* Styles pour les champs de formulaire */
+mat-form-field.full-width {
+  width: 100%; /* Prendre toute la largeur */
+  margin-bottom: 10px; /* Espacement entre les champs */
+  background-color: transparent; /* Fond transparent pour le champ */
+  border: none; /* Supprimer la bordure par défaut */
+}
+
+/* Styles pour les inputs à l'intérieur des mat-form-field */
+mat-form-field input {
+  background-color: transparent; /* Fond transparent pour l'input */
+  color: #000; /* Couleur du texte */
+}
+
+/* Styles pour les labels */
+mat-label {
+  color: rgba(0, 0, 0, 0.7); /* Couleur du label */
+}
+
+/* Styles pour les erreurs de validation */
+mat-error {
+  color: rgb(199, 16, 16); /* Couleur des messages d'erreur */
+}
+
+
+/* Styles pour les titres de carte */
+mat-card-title {
+  text-align: center;
+  font-size: 24px; /* Taille de police ajustée */
+  font-weight: bold;
+  color: #0a74da;
+  margin-bottom: 20px;
+}
+
+/* Styles pour les erreurs de validation */
+small {
+  color: rgb(199, 16, 16);
+}
+
+/* Styles pour le groupe de boutons radio */
+.radio-group {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0;
+}
+
+/* Styles pour les boutons */
+button.ghost {
+  background: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+button.ghost:hover {
+  background: white;
+  color: #0a74da;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .full-container {
+    flex-direction: column; /* Empiler les côtés sur les petits écrans */
+    height: auto; /* Hauteur automatique */
+  }
+
+  mat-card {
+    max-width: 100%; /* Prendre toute la largeur sur petits écrans */
+  }
+}

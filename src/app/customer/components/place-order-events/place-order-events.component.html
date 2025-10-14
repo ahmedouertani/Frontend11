@@ -1,0 +1,75 @@
+<div class="reservation-container">
+  <h2 class="text-center mb-4">🧾 Finaliser la réservation</h2>
+
+  <form [formGroup]="form" (ngSubmit)="finaliserReservation()">
+    <!-- Date -->
+    <mat-form-field appearance="fill" class="w-100 mb-3">
+      <mat-label>Date de réservation</mat-label>
+      <input matInput
+            [matDatepicker]="picker"
+            formControlName="date"
+            [min]="minDate"
+            [matDatepickerFilter]="dateFilter"
+            required
+            (dateChange)="onDateSelected($event)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Heure -->
+    <mat-form-field appearance="fill" class="w-100 mb-3" *ngIf="availableHours.length > 0">
+      <mat-label>Heure de réservation</mat-label>
+      <mat-select formControlName="heure" required>
+        <mat-option *ngFor="let hour of availableHours" [value]="hour">{{ hour }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="availableHours.length === 0 && form.get('date')?.value" class="alert alert-warning mt-2">
+      ⚠️ Aucune heure disponible pour cette date
+    </div>
+
+    <!-- Adresse -->
+    <mat-form-field appearance="fill" class="w-100 mb-3">
+      <mat-label>Adresse</mat-label>
+      <input matInput formControlName="adresse">
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="fill" class="w-100 mb-3">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="3"></textarea>
+    </mat-form-field>
+
+    <!-- Code Promo -->
+    <mat-form-field appearance="fill" class="w-100 mb-3">
+      <mat-label>Code Promo (facultatif)</mat-label>
+      <input matInput formControlName="codePromo" placeholder="Ex: BIENVENUE25">
+    </mat-form-field>
+
+    <button mat-raised-button class="submit-btn w-100 mt-3" [disabled]="form.invalid">
+      ✅ Valider la réservation
+    </button>
+  </form>
+
+  <!-- Liste produits -->
+  <div class="mt-5">
+    <h4 class="section-title">🛍️ Produits réservés</h4>
+
+    <div class="services-grid">
+      <div *ngFor="let s of services" class="service-card">
+        <img *ngIf="s.returnedImg" [src]="'data:image/png;base64,' + s.returnedImg"
+          alt="Service" class="service-image">
+        <div class="service-content">
+          <h5 class="service-name">{{ s.serviceName }}</h5>
+          <p class="service-category"><strong>Catégorie :</strong> {{ s.categoryName }}</p>
+          <p class="service-price"><strong>Prix :</strong> {{ s.prix }} TND</p>
+          <button mat-stroked-button color="warn" class="delete-btn" (click)="supprimer(s.serviceId)">Supprimer de réservations</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button mat-fab class="floating-btn" (click)="goToPlaceOrder()">
+  <p>Ajoutée reservations</p>
+</button>

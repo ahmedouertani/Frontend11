@@ -1,0 +1,88 @@
+.container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre */
+h2 {
+  font-weight: bold;
+  color: #1976d2;
+}
+
+/* Champ de recherche */
+.search-field-wrapper {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Table responsive */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Table style */
+table {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: collapse;
+}
+
+/* Header */
+thead th {
+  background-color: #1976d2;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Cells */
+th, td {
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* Hover */
+table.table-hover tbody tr:hover {
+  background-color: #f1f9ff;
+}
+
+/* Badges status */
+.badge-success {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.badge-warning {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.badge-danger {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* Action boutons */
+.actions-btn {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+}

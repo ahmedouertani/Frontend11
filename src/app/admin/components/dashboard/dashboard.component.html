@@ -1,0 +1,70 @@
+<div class="main-content">
+  <div class="form-container">
+
+    <!-- Formulaire de recherche -->
+    <form [formGroup]="searchProductForm" (ngSubmit)="submitForm()" class="search-form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Entrer un mot-clé</mat-label>
+        <input matInput formControlName="title" placeholder="Nom du service">
+        <button mat-icon-button matSuffix type="submit" [disabled]="searchProductForm.invalid">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+
+    <!-- Liste des produits -->
+    <div class="product-grid">
+      <mat-card class="product-card"  *ngFor="let service of services; let i = index">
+        
+        <div class="product-image">
+          <img [src]="service.processedImg" alt="Image service" (click)="goToDetail(service.id)">
+        </div>
+
+        <div class="product-details">
+          <h2>{{ service.nom }}</h2>
+          <p>{{ service.description }}</p>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="product-info">
+          <span class="info-label">Catégorie :</span>
+          <span class="info-value">{{ service.categoryName }}</span>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="product-status">
+          <strong>Statut :</strong> {{ service.status }}
+        </div>
+        
+        <div class="status-radio">
+          <mat-radio-group
+            [value]="service.status"
+            (change)="changeStatus(service.id, $event.value)"
+            class="status-radio-group">
+            <mat-radio-button value="ACTIF">Actif</mat-radio-button>
+            <mat-radio-button value="ANNULE">Inactif</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        
+        <div class="product-actions">
+          <button mat-flat-button color="primary" [routerLink]="['/admin/update-product', service.id]">
+            Modifier
+          </button>
+
+          <!-- Delete button -->
+          <button mat-flat-button color="warn" (click)="deleteService(i)">
+            Supprimer
+          </button>
+        </div>
+<div> <a [routerLink]="['/admin/service', service.id, 'media']">
+  <button mat-button color="primary">
+    <mat-icon>add_photo_alternate</mat-icon> Ajouter Médias
+  </button>
+</a></div>
+      </mat-card>
+    </div>
+
+  </div>
+</div>

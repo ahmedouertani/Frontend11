@@ -1,0 +1,48 @@
+<div class="cheers-page container py-5">
+    <!-- Logo + Titre -->
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logoomega.webp" alt="Logo Omega" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Omega - Salle de fêtes</h2>
+      <p class="cheers-description">
+        Grâce à notre collaboration avec Omega, nous avons valorisé leur salle de fête avec une communication visuelle élégante, 
+        des contenus créatifs et une présence digitale forte. 
+        <br />
+        Objectif : séduire une clientèle à la recherche d’un lieu unique et renforcer leur notoriété sur les réseaux sociaux.
+      </p>
+    </div>
+  
+    <!-- ================= DESIGN GRAPHIQUE ================= -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Design Graphique</h2>
+      <div class="cheers-gallery">
+        <img src="assets/partenaires/omega/affiche1.webp" alt="Affiche 1" class="cheers-poster" (click)="openLightbox('assets/partenaires/omega/affiche1.webp')" />
+        <img src="assets/partenaires/omega/affiche2.webp" alt="Affiche 2" class="cheers-poster" (click)="openLightbox('assets/partenaires/omega/affiche2.webp')" />
+        <img src="assets/partenaires/omega/affiche3.webp" alt="Affiche 3" class="cheers-poster" (click)="openLightbox('assets/partenaires/omega/affiche3.webp')" />
+        <img src="assets/partenaires/omega/affiche4.webp" alt="Affiche 4" class="cheers-poster" (click)="openLightbox('assets/partenaires/omega/affiche4.webp')" />
+        <img src="assets/partenaires/omega/affiche3.webp" alt="Affiche 3" class="cheers-poster" (click)="openLightbox('assets/partenaires/omega/affiche3.webp')" />
+        <img src="assets/partenaires/omega/affiche4.webp" alt="Affiche 4" class="cheers-poster" (click)="openLightbox('assets/partenaires/omega/affiche4.webp')" />
+      </div>
+      <div id="lightbox" class="lightbox" (click)="closeLightbox()" *ngIf="showLightbox">
+        <img [src]="lightboxImage" alt="image agrandie">
+      </div>
+    </section>
+  
+    <!-- ================= CREATION DE CONTENU ================= -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Création de contenu</h2>
+      <div class="cheers-reel-container">
+        <video class="cheers-reel" controls muted loop>
+          <source src="assets/partenaires/omega/videoomega.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+      </div>
+    </section>
+  
+    <!-- Retour -->
+    <div class="back-to-clients">
+      <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+        <i class="fas fa-arrow-left"></i> Retour aux clients
+      </a>
+    </div>
+  </div>
+  

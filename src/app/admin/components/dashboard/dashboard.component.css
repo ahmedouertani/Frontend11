@@ -1,0 +1,110 @@
+.main-content {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Container général */
+.form-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Formulaire de recherche */
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.form-field {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Grille produits */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Carte produit */
+.product-card {
+  width: 100%;
+  max-width: 400px; /* ✅ largeur max de la carte */
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Image service */
+.product-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Détails service */
+.product-details h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #203a43;
+}
+
+.product-details p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Info service */
+.product-info {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 500;
+  color: #666;
+}
+
+.info-label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Actions (Modifier - Supprimer) */
+.product-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .form-field {
+    max-width: 100%;
+  }
+
+  .product-card {
+    margin: 0 1rem;
+    max-width: 100%;
+  }
+}

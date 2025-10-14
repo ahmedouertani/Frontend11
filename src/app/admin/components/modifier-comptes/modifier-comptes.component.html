@@ -1,0 +1,55 @@
+<div class="main-content">
+  <div class="edit-user-container">
+    <mat-card class="edit-card">
+      <mat-card-title>Modifier Compte</mat-card-title>
+
+      <mat-card-content>
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="edit-form">
+
+          <!-- Upload Image -->
+          <div class="image-upload">
+            <div *ngIf="previewUrl" class="image-preview">
+              <img [src]="previewUrl" alt="Image utilisateur" />
+              <button mat-icon-button type="button" class="remove-image-btn" (click)="removeImage()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+
+            <input type="file" #fileInput hidden (change)="onFileSelected($event)" />
+            <button mat-stroked-button color="primary" type="button" (click)="fileInput.click()">
+              <mat-icon>add_photo_alternate</mat-icon> {{ previewUrl ? 'Changer' : 'Ajouter' }} une image
+            </button>
+          </div>
+
+          <!-- Champs -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nom</mat-label>
+            <input matInput formControlName="nom" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Téléphone</mat-label>
+            <input matInput formControlName="telephone" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput type="password" formControlName="motdepasse" />
+            <mat-hint>Laissez vide pour ne pas changer le mot de passe</mat-hint>
+          </mat-form-field>
+
+          <!-- Boutons -->
+          <div class="form-actions">
+            <button mat-flat-button color="primary" type="submit" [disabled]="editForm.invalid">Enregistrer</button>
+          </div>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

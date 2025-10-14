@@ -1,0 +1,38 @@
+<div class="dialog-container">
+  <mat-card class="reservation-card">
+    <mat-card-title class="dialog-title">📝 Confirmer la Demande</mat-card-title>
+
+    <mat-card-content>
+      <form [formGroup]="orderForm" (ngSubmit)="placeOrder()">
+
+        <!-- Champ description -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description de la demande</mat-label>
+          <textarea matInput formControlName="reservationDescription" rows="5" placeholder="Vos besoins (pérsonalisés)"></textarea>
+          <mat-error *ngIf="orderForm.get('reservationDescription')?.hasError('reservationDescription') && orderForm.get('description')?.touched">
+            Ce champ est requis
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Adresse </mat-label>
+          <textarea matInput formControlName="adresse" rows="5" placeholder="Ville"></textarea>
+          <mat-error *ngIf="orderForm.get('adresse')?.hasError('required') && orderForm.get('adresse')?.touched">
+            Ce champ est requis
+          </mat-error>
+        </mat-form-field>
+
+
+        <!-- Boutons -->
+        <div class="button-group">
+          <button mat-raised-button color="primary" type="submit" [disabled]="orderForm.invalid || isSubmitting">
+            ✅ Commander
+          </button>
+          <button mat-stroked-button color="warn" type="button" (click)="closeForm()">
+            ❌ Annuler
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,38 @@
+<div class="newsletter-container">
+    <h2>Envoyer une Newsletter</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="sendNewsletter()">
+      <div class="email-selection">
+        <h3>Sélectionnez les emails :</h3>
+  
+        <div *ngIf="emails.length > 0; else noEmails">
+          <div *ngFor="let email of emails">
+            <input 
+              type="checkbox"
+              [value]="email.email"
+              (change)="toggleEmail(email.email, $event)"
+            > {{ email.email }}
+          </div>
+        </div>
+  
+        <ng-template #noEmails>
+          <p>Aucun email disponible pour l'instant.</p>
+        </ng-template>
+      </div>
+  
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Sujet</mat-label>
+        <input matInput formControlName="subject" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contenu</mat-label>
+        <textarea matInput formControlName="content" rows="6" required></textarea>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" [disabled]="isLoading" type="submit">
+        {{ isLoading ? 'Envoi en cours...' : 'Envoyer' }}
+      </button>
+    </form>
+  </div>
+  

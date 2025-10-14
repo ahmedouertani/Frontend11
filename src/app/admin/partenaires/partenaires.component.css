@@ -1,0 +1,85 @@
+/* Conteneur principal */
+.container {
+  padding: 20px; /* Espacement interne */
+}
+
+/* Titre de la page */
+.page-title {
+  font-size: 2rem; /* Taille de la police */
+  color: #333; /* Couleur du texte */
+  margin-bottom: 20px; /* Espacement en bas */
+}
+
+/* Spinner de chargement */
+.loading-spinner {
+  display: flex;
+  justify-content: center; /* Centrer le spinner */
+  margin: 20px 0; /* Espacement vertical */
+}
+
+/* Wrapper pour le mat-card */
+.mat-card-wrapper {
+  border-radius: 12px; /* Coins arrondis */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Wrapper pour la table */
+.table-responsive-wrapper {
+  overflow-x: auto; /* Permettre le défilement horizontal */
+}
+
+/* Styles pour la table */
+.full-width-table {
+  width: 100%; /* Table pleine largeur */
+  border-collapse: collapse; /* Supprimer les espaces entre les cellules */
+}
+
+/* Styles pour les cellules d'en-tête */
+.mat-header-cell {
+  background-color: #f5f5f5; /* Couleur de fond des en-têtes */
+  font-weight: bold; /* Texte en gras */
+  padding: 12px; /* Espacement interne */
+  text-align: left; /* Alignement à gauche */
+}
+
+/* Styles pour les cellules */
+.mat-cell {
+  padding: 12px; /* Espacement interne */
+  border-bottom: 1px solid #e0e0e0; /* Ligne de séparation */
+}
+
+/* Styles pour les boutons d'action */
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Espacement entre les boutons */
+}
+
+/* Styles pour le message "Aucun prestataire trouvé" */
+.no-data {
+  text-align: center; /* Centrer le texte */
+  margin: 20px 0; /* Espacement vertical */
+  color: #777; /* Couleur du texte */
+}
+
+/* Conteneur pour le bouton d'ajout */
+.add-button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligner à droite */
+  margin-top: 20px; /* Espacement au-dessus */
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.5rem; /* Réduire la taille du titre sur mobile */
+  }
+
+  .mat-header-cell, .mat-cell {
+    padding: 8px; /* Réduire l'espacement interne sur mobile */
+  }
+
+  .action-buttons {
+    flex-direction: column; /* Empiler les boutons verticalement sur mobile */
+    gap: 5px; /* Espacement réduit entre les boutons */
+  }
+}

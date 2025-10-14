@@ -1,0 +1,28 @@
+<div class="center-container">
+  <!-- Message si la wishlist est vide -->
+  <p *ngIf="services.length === 0" class="empty-text">
+    💔 Aucun produit dans vos favories pour le moment.
+  </p>
+
+  <!-- Affichage des produits -->
+  <div class="product-card" *ngFor="let service of services">
+    <!-- Image du produit -->
+    <div class="product-image">
+      <img *ngIf="service.processedImg" [src]="service.processedImg" [alt]="service.serviceName + ' Image'" />
+    </div>
+
+    <!-- Détails du produit -->
+    <div class="product-details">
+      <h2 class="product-name">{{ service.serviceName }}</h2>
+      <p class="description">{{ service.serviceDescription }}</p>
+    </div>
+
+    <!-- Bouton de suppression -->
+    <div class="wishlist-actions">
+      <button mat-icon-button color="warn" (click)="deleteWishlist(service.wishlistId)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      
+    </div>
+  </div>
+</div>

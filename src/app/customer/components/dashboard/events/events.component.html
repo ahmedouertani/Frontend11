@@ -1,0 +1,38 @@
+<!-- 🔘 Boutons catégorie -->
+<div class="category-buttons">
+  <button *ngFor="let cat of categories"
+          mat-raised-button
+          color="{{ selectedCategory === cat ? 'primary' : 'accent' }}"
+          (click)="selectCategory(cat)">
+    {{ cat }}
+  </button>
+</div>
+
+<!-- 🛍️ Liste scrollable -->
+<div class="services-container" *ngIf="filteredServices.length > 0">
+  <div *ngFor="let s of filteredServices" class="service-card">
+    <img [src]="s.processedImg" alt="image"  (click)="goToDetail(s.id, 'event')"/>
+    <div class="card-body">
+      <h5>{{ s.nom }}</h5>
+      <p>{{ s.serviceDescription }}</p>
+      <p><strong>Catégorie :</strong> {{ s.categoryName }}</p>
+      <p><strong>Prix :</strong> {{ s.prix ? s.prix + ' TND' : 'Non défini' }}</p>
+      <button mat-raised-button color="primary" (click)="reserver(s.id)">Réserver ce service</button>
+    </div>
+  </div>
+</div>
+
+<!-- ❌ Aucun service -->
+<div *ngIf="filteredServices.length === 0" class="no-service-msg">
+  Aucun service pour cette catégorie.
+</div>
+
+<!-- ✅ Bouton finaliser -->
+<button 
+  *ngIf="showFinalizeButton"
+  mat-fab
+  color="accent"
+  class="floating-btn"
+  (click)="goToPlaceOrder()">
+  Finaliser
+</button>

@@ -1,0 +1,158 @@
+.main-content {
+    padding: 2rem;
+    background: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  /* Correction pour mobile */
+  @media (max-width: 768px) {
+    .main-content {
+      padding: 1rem; /* réduire padding sur mobile */
+    }
+  }
+  
+  .form-container {
+    max-width: 1200px;
+    margin: auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Correction sur mobile */
+  @media (max-width: 768px) {
+    .form-container {
+      padding: 1rem;
+      margin: 10px;
+    }
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #203a43;
+    margin-bottom: 2rem;
+  }
+  
+  /* TABLEAU */
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+  }
+  
+  /* ✅ TABLE FLEXIBLE */
+  .client-table {
+    min-width: 550px; /* plus réduit */
+    width: 100%;
+  }
+  
+  mat-card {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+  
+  mat-card-content {
+    padding: 0;
+  }
+  
+  mat-header-cell, mat-cell {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  /* 🎯 STYLE DU BOUTON ACTION */
+  button[mat-stroked-button] {
+    border: 1px solid #203a43;
+    color: #203a43;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  button[mat-stroked-button]:hover {
+    background-color: #203a43;
+    color: white;
+  }
+  
+  /* 🎯 STYLE DES ELEMENTS DU MENU (Modifier / Bloquer / Débloquer) */
+  mat-menu {
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  mat-menu button[mat-menu-item] {
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  
+  mat-menu button[mat-menu-item] mat-icon {
+    margin-right: 8px;
+    color: #203a43;
+  }
+  
+  /* 🎯 STYLE DIFFÉRENT POUR BLOQUER & DEBLOQUER */
+  mat-menu button[mat-menu-item]:hover {
+    background: #f0f0f0;
+  }
+  
+  /* ✅ Un petit rouge pour Bloquer */
+  mat-menu button[mat-menu-item]:hover mat-icon[svgicon="block"] {
+    color: #d9534f;
+  }
+  
+  /* ✅ Un petit vert pour Débloquer */
+  mat-menu button[mat-menu-item]:hover mat-icon[svgicon="lock_open"] {
+    color: #5cb85c;
+  }
+  
+  /* Adapter les boutons sur mobile */
+  @media (max-width: 768px) {
+    .action-buttons {
+      flex-direction: column;
+    }
+  
+    .action-buttons button {
+      min-width: auto;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+  
+    mat-header-cell, mat-cell {
+      padding: 0.5rem;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .no-data-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 2rem;
+  }
+  

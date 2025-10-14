@@ -1,0 +1,111 @@
+.main-content {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  align-items: flex-start;
+}
+
+/* ✅ 60 / 40 split */
+.add-category-container {
+  flex: 1 1 50%;   /* grow, shrink, basis */
+  max-width: 50%;
+  background: rgb(255, 255, 255);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-category-container {
+  flex: 1 1 50%;
+  max-width: 50%;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-category-container mat-list {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+/* Titres */
+.page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0d47a1;
+}
+
+/* Formulaire */
+.category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-grow: 1;
+}
+
+/* Champs */
+.full-width {
+  width: 100%;
+}
+
+/* Boutons */
+.form-actions {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.form-actions button {
+  min-width: 150px;
+}
+
+
+
+/* List item */
+.category-item {
+  margin-bottom: 15px;
+}
+
+/* Category name */
+span.nametypecate {
+  font-size: 20px;
+  color: #0d47a1;
+}
+
+/* Icon left aligned */
+.category-item i[matListIcon] {
+  font-size: 18px;
+  margin-right: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #0d47a1;
+  color: white;
+  flex-shrink: 0;
+}
+.category-item {
+  margin-bottom: 15px;
+  display: flex;          /* make list item flex */
+  align-items: center;    /* vertically center icon & text */
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+}

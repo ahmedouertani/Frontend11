@@ -1,0 +1,182 @@
+/* Styles généraux */
+.main-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 600px;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.main-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.partner-form {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 25px;
+  box-sizing: border-box;
+}
+
+.form-field {
+  width: 100%;
+}
+
+/* Full width fields */
+.form-field.full-width {
+  grid-column: span 2;
+}
+
+/* Button Centered */
+.text-center {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Button styling */
+button[mat-flat-button] {
+  background-color: #1976d2;
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 140px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+button[mat-flat-button]:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}
+
+button[mat-flat-button]:hover:not(:disabled) {
+  background-color: #115293;
+}
+
+/* Responsive for large screens (above 700px) */
+@media (min-width: 701px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .form-field.full-width {
+    grid-column: span 2;
+  }
+}
+
+/* Responsive for small and medium screens (max-width 700px) */
+/* Inputs stacked vertically as lines */
+@media (max-width: 700px) {
+  .main-title {
+    font-size: 1.6rem;
+  }
+  .partner-form {
+    padding: 15px 20px;
+  }
+  .text-center {
+    margin-top: 25px;
+  }
+  .form-grid {
+    display: block;
+  }
+  .form-field {
+    width: 100%;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .form-field.full-width {
+    width: 100%;
+  }
+  input[matInput] {
+    font-size: 0.95rem !important;
+    padding: 8px 10px !important;
+  }
+  label[mat-label] {
+    font-size: 0.9rem !important;
+  }
+  button[mat-flat-button] {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 6px;
+  }
+}
+
+/* Additional styling for very small screens (up to 400px) */
+@media (max-width: 400px) {
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+  }
+
+  .main-content {
+    padding: 15px 10px;
+    min-height: 600px;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .container {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .main-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .partner-form {
+    padding: 12px 15px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    border-radius: 8px;
+  }
+
+  /* form-grid block handled in max-width 700px */
+  /* form-field full width handled in max-width 700px */
+
+  input[matInput] {
+    font-size: 0.9rem !important;
+    padding: 7px 10px !important;
+  }
+
+  label[mat-label] {
+    font-size: 0.85rem !important;
+  }
+
+  button[mat-flat-button] {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+
+  .text-center {
+    margin-top: 20px;
+  }
+}

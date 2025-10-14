@@ -1,0 +1,79 @@
+.table-container {
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 95vw;
+  overflow-x: auto;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0d2b5d;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.styled-table th, .styled-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #0b4184;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.badge-success {
+  color: #fff;
+  background-color: #4caf50;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.badge-warning {
+  color: #000;
+  background-color: #ffeb3b;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.badge-danger {
+  color: #fff;
+  background-color: #f44336;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .styled-table th, .styled-table td {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+}

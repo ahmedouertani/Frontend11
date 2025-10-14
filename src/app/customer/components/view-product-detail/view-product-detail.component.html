@@ -1,0 +1,57 @@
+<!-- 🎬 Images -->
+<div class="media-section" *ngIf="mediaList.length > 0 && hasImages()">
+  <h3>📷 Images associées</h3>
+  <div class="media-grid">
+    <ng-container *ngFor="let media of mediaList">
+      <img *ngIf="media.type === 'IMAGE'" [appLazyLoad]="'data:image/jpeg;base64,' + media.base64" class="media-image" alt="Image" />
+    </ng-container>
+  </div>
+</div>
+
+<!-- 🎬 Vidéos -->
+<div class="media-section" *ngIf="mediaList.length > 0 && hasVideos()">
+  <h3>🎬 Vidéos associées</h3>
+  <div class="media-grid">
+    <ng-container *ngFor="let media of mediaList">
+      <video *ngIf="media.type === 'VIDEO'" class="media-video" controls>
+        <source [src]="'data:video/mp4;base64,' + media.base64" type="video/mp4" />
+      </video>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Détail produit -->
+<div class="detail-card-container">
+  <div class="image-section">
+    <img *ngIf="services.processedImg" [src]="services.processedImg" class="side-img" />
+  </div>
+
+  <div class="info-section">
+    <h2>{{ services.nom }}</h2>
+    <p>{{ services.description }}</p>
+
+    <!-- Avis clients -->
+    <div class="review-section" *ngIf="reviews.length > 0">
+      <h3>🗣️ Avis Clients</h3>
+      <div *ngFor="let review of reviews" class="review-comment">
+        <div class="review-header">
+          <strong class="username">{{ review.userName }}</strong>
+          <span class="rating">⭐ {{ review.rating }}/5</span>
+        </div>
+        <div class="review-body">
+          <p class="description">"{{ review.description }}"</p>
+          <img *ngIf="review.processedImg" [src]="review.processedImg" class="review-img" />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="reviews.length === 0" class="no-review">
+      Aucun avis pour ce produit.
+    </div>
+  </div>
+
+  <!-- Ajouter à la demande -->
+  <button class="btn-float-add" (click)="addToCart(services.id)">
+    <i class="fas fa-plus-circle"></i> Ajouter à mes demandes
+  </button>
+</div>

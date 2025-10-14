@@ -1,0 +1,53 @@
+<section class="contact-hero">
+  <div class="container py-5">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <h2 class="contact-title">Écrivez-nous</h2>
+        <p class="text-muted">Vous avez une question, un projet ou besoin d’un conseil ? Nous sommes à votre écoute.</p>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="form-group mb-3">
+            <input type="text" class="form-control modern-input" formControlName="nom" placeholder="Nom complet">
+          </div>
+          <div class="form-group mb-3">
+            <input type="email" class="form-control modern-input"  formControlName="email"  placeholder="xyz@xyz.com">
+          </div>
+          <div class="form-group mb-3">
+            <input type="text" class="form-control modern-input"  formControlName="sujet"  placeholder="Sujet">
+          </div>
+          <div class="form-group mb-4">
+            <textarea rows="5" class="form-control modern-input"   formControlName="message"  placeholder="Votre message..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-tansi w-100" [disabled]="contactForm.invalid || isSubmitting">
+            Envoyer
+          </button>        </form>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="contact-info-modern">
+          <h5 class="text-gold mb-3">Nos coordonnées</h5>
+          <p><i class="fas fa-map-marker-alt me-2"></i> Avenue Hedi Chaker, Sfax, Tunisie</p>
+          <p><i class="fas fa-envelope me-2"></i> contact8tansikgroup.com</p>
+          <p><i class="fas fa-phone me-2"></i> +216 55 189 286</p>
+          
+          <div class="mt-4">
+            <h6 class="text-gold mb-2">Réseaux sociaux</h6>
+            <div class="social-icons-modern">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h6 class="text-gold mb-2">Notre localisation</h6>
+            <div class="map-responsive ratio ratio-16x9">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6557.7087623587795!2d10.750982293499076!3d34.73406474163082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13002d2ea47b9ff9%3A0xd72d943613ed39f0!2sIntilaka%201!5e0!3m2!1sfr!2stn!4v1742950376871!5m2!1sfr!2stn"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

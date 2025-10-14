@@ -1,0 +1,24 @@
+<form [formGroup]="searchOrderForm" class="search-form" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Tracking ID to search</mat-label>
+      <input matInput formControlName="trackingId" />
+      <button mat-icon-button matSuffix color="primary" [disabled]="searchOrderForm.invalid">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  
+  <!-- ✅ Affichage de la commande si elle est trouvée -->
+  <div class="order-details-container" *ngIf="order">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Réservation Details</mat-card-title>
+      </mat-card-header>
+  
+      <div class="order-detail">Nom: <strong>{{ order.userName }}</strong></div>
+      <div class="order-detail">Address: <strong>{{ order.adresse}}</strong></div>
+      <div class="order-detail">Status: <strong>{{ order.orderStatus }}</strong></div>
+      <div class="order-detail">Date: <strong>{{ order.date | date }}</strong></div>
+    </mat-card>
+  </div>
+  

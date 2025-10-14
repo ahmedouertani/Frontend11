@@ -1,0 +1,36 @@
+<div class="cheers-page container py-5">
+    <!-- Logo + Titre -->
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logogreenland.webp" alt="Logo Green Land" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Green Land - Événement Nature & Bien-être</h2>
+      <p class="cheers-description">
+        Pour Green Land, nous avons conçu une identité visuelle reflétant leurs valeurs : nature, bien-être et sérénité.
+        <br />
+        Notre mission : développer une stratégie graphique et une communication harmonieuse pour attirer un public sensible à l’écologie et à l’élégance.
+      </p>
+    </div>
+  
+    <!-- ================= DESIGN GRAPHIQUE ================= -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Design Graphique</h2>
+      <div class="cheers-gallery">
+        <img src="assets/partenaires/greenland/affiche1.webp" alt="Affiche 1" class="cheers-poster" (click)="openLightbox('assets/partenaires/greenland/affiche1.webp')" />
+        <img src="assets/partenaires/greenland/affiche2.webp" alt="Affiche 2" class="cheers-poster" (click)="openLightbox('assets/partenaires/greenland/affiche2.webp')" />
+        <img src="assets/partenaires/greenland/affiche3.webp" alt="Affiche 3" class="cheers-poster" (click)="openLightbox('assets/partenaires/greenland/affiche3.webp')" />
+        <img src="assets/partenaires/greenland/affiche4.webp" alt="Affiche 4" class="cheers-poster" (click)="openLightbox('assets/partenaires/greenland/affiche4.webp')" />
+        <img src="assets/partenaires/greenland/affiche2.webp" alt="Affiche 2" class="cheers-poster" (click)="openLightbox('assets/partenaires/greenland/affiche2.webp')" />
+        <img src="assets/partenaires/greenland/affiche3.webp" alt="Affiche 3" class="cheers-poster" (click)="openLightbox('assets/partenaires/greenland/affiche3.webp')" />
+      </div>
+      <div id="lightbox" class="lightbox" (click)="closeLightbox()" *ngIf="showLightbox">
+        <img [src]="lightboxImage" alt="image agrandie" />
+      </div>
+    </section>
+  
+    <!-- Retour -->
+    <div class="back-to-clients">
+      <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+        <i class="fas fa-arrow-left"></i> Retour aux clients
+      </a>
+    </div>
+  </div>
+  

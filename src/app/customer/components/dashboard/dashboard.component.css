@@ -1,0 +1,160 @@
+/* Style pour le formulaire de recherche */
+.search-form {
+    margin: 20px 0;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+/* Style pour la liste de produits */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  
+  .product-card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-details {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .product-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    color: #0d47a1;
+  }
+  
+  .product-description {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .product-info {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .actions {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .actions button {
+    font-weight: 500;
+  }
+  
+
+/* Effet au survol */
+.actions button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Bouton "Add to Cart" spécifique */
+.add-to-cart-button {
+    background-color: #28a745; /* Couleur verte */
+    color: white;
+    padding: 10px 20px; /* Ajustez la taille ici */
+    font-size: 1.2rem;  /* Augmenter la taille du texte */
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Effet au survol pour le bouton "Add to Cart" */
+.add-to-cart-button:hover {
+    background-color: #218838; /* Couleur plus foncée au survol */
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .image-card img {
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+  .floating-reservation-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    animation: slideUp 0.5s ease-in-out;
+  }
+  
+  .animated-reserve-btn {
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    background-color: #d4af37; /* Gold */
+    color: white;
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+/* Adaptation sur mobile */
+@media (max-width: 600px) {
+    .actions {
+        flex-direction: column;
+    }
+
+    .actions button {
+        width: 100%;
+    }
+}

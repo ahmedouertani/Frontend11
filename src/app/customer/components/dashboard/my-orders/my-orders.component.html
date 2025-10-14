@@ -1,0 +1,160 @@
+<div class="container">
+  <!-- Product Orders -->
+  <mat-card class="order-card">
+    <mat-card-title class="card-title">
+      <mat-icon>shopping_cart</mat-icon>
+      Commandes Prod
+    </mat-card-title>
+    <mat-card-content>
+      <mat-spinner *ngIf="isLoading && !deletingOrderId" class="spinner-center" color="accent"></mat-spinner>
+
+      <mat-table *ngIf="!isLoading" [dataSource]="productOrders" class="mat-elevation-z8 responsive-table">
+
+        <!-- Columns -->
+        <ng-container matColumnDef="trackingId">
+          <th mat-header-cell *matHeaderCellDef>Tracking ID</th>
+          <td mat-cell *matCellDef="let order" class="tracking-id">{{ order.trackingId || 'N/A' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nomService">
+          <th mat-header-cell *matHeaderCellDef>Service</th>
+          <td mat-cell *matCellDef="let order" class="service-name">{{ order.nomService }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let order" class="description">{{ order.reservationDescription }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="adresse">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let order" class="address">{{ order.adresse }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let order" class="date-cell">{{ order.date | date: 'mediumDate' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let order">
+            <span class="status-badge" [ngClass]="getStatusClass(order.orderStatus)">
+              {{ order.orderStatus || 'UNKNOWN' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="action-header">Actions</th>
+          <td mat-cell *matCellDef="let order" class="action-cell">
+            <ng-container *ngIf="order.orderStatus === 'ACCEPTER'; else deleteBtn">
+              <button mat-raised-button color="accent" class="action-btn review-btn"
+                (click)="writeReview(order, 'product', $event)">
+                <mat-icon>rate_review</mat-icon> Donner avis
+              </button>
+            </ng-container>
+            <ng-template #deleteBtn>
+              <button mat-raised-button color="warn" class="action-btn delete-btn" 
+                (click)="deleteProductOrder(order.id, $event)" 
+                [disabled]="deletingOrderId === order.id">
+                <ng-container *ngIf="deletingOrderId !== order.id">
+                  <mat-icon>delete</mat-icon> Supprimer
+                </ng-container>
+                <ng-container *ngIf="deletingOrderId === order.id">
+                  <mat-spinner diameter="20" class="inline-spinner"></mat-spinner>
+                </ng-container>
+              </button>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedProductColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedProductColumns" 
+            class="order-row" (click)="onRowClick(row, 'product')"></tr>
+      </mat-table>
+
+      <div *ngIf="productOrders.length === 0 && !isLoading" class="no-orders">
+        <mat-icon>inbox</mat-icon>
+        <p>No product orders found</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Event Orders -->
+  <mat-card class="order-card mt-4">
+    <mat-card-title class="card-title">
+      <mat-icon>event</mat-icon>
+      Reservations  Events
+    </mat-card-title>
+    <mat-card-content>
+      <mat-spinner *ngIf="isLoadingEvents && !deletingOrderId" class="spinner-center" color="accent"></mat-spinner>
+
+      <mat-table *ngIf="!isLoadingEvents" [dataSource]="eventOrders" class="mat-elevation-z8 responsive-table">
+
+        <!-- Columns -->
+        <ng-container matColumnDef="nomService">
+          <th mat-header-cell *matHeaderCellDef>Service</th>
+          <td mat-cell *matCellDef="let order" class="service-name">{{ order.nomService }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let order" class="description">{{ order.reservationDescription }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="adresse">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let order" class="address">{{ order.adresse }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let order" class="date-cell">{{ order.date }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let order">
+            <span class="status-badge" [ngClass]="getStatusClass(order.orderStatus)">
+              {{ order.orderStatus || 'UNKNOWN' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="action-header">Actions</th>
+          <td mat-cell *matCellDef="let order" class="action-cell">
+            <ng-container *ngIf="order.orderStatus === 'ACCEPTER'; else deleteEvent">
+              <button mat-raised-button color="accent" class="action-btn review-btn"
+                (click)="writeReview(order, 'event', $event)">
+                <mat-icon>rate_review</mat-icon> Donner avis
+              </button>
+            </ng-container>
+            <ng-template #deleteEvent>
+              <button mat-raised-button color="warn" class="action-btn delete-btn"
+                (click)="deleteEventOrder(order.id, $event)" 
+                [disabled]="deletingOrderId === order.id">
+                <ng-container *ngIf="deletingOrderId !== order.id">
+                  <mat-icon>delete</mat-icon> Supprimer
+                </ng-container>
+                <ng-container *ngIf="deletingOrderId === order.id">
+                  <mat-spinner diameter="20" class="inline-spinner"></mat-spinner>
+                </ng-container>
+              </button>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedEventColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedEventColumns" 
+            class="order-row" (click)="onRowClick(row, 'event')"></tr>
+      </mat-table>
+
+      <div *ngIf="eventOrders.length === 0 && !isLoadingEvents" class="no-orders">
+        <mat-icon>event</mat-icon>
+        <p>No event reservations found</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

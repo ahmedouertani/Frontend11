@@ -1,0 +1,63 @@
+.main-content {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Container centré */
+.order-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Champ recherche */
+.search-field {
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto 2rem;
+  display: block;
+}
+
+/* Wrapper pour rendre table scrollable mobile */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table design */
+.orders-table {
+  width: 100%;
+  border-radius: 8px;
+  background: white;
+}
+
+/* Style badges */
+.badge-success {
+  color: white;
+  background-color: #4caf50;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.badge-warning {
+  color: white;
+  background-color: #ffc107;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.badge-danger {
+  color: white;
+  background-color: #f44336;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .orders-table {
+    min-width: 600px; /* ✅ Table scrollable sur mobile */
+  }
+}

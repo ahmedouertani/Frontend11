@@ -1,0 +1,36 @@
+<div class="cheers-page container py-5">
+    <!-- Logo + Titre -->
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logoledouceur.webp" alt="Logo Le Douceur" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Douceur - Pâtisserie & Délices</h2>
+      <p class="cheers-description">
+        Pour Douceur, nous avons déployé une stratégie visuelle raffinée, à l’image de leurs créations sucrées.
+        De l'identité graphique aux supports marketing, notre objectif était de refléter la qualité et la gourmandise
+        dans chaque visuel.
+      </p>
+    </div>
+  
+    <!-- Design Graphique -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Design Graphique</h2>
+      <div class="cheers-gallery">
+        <img src="assets/partenaires/ledouceur/affiche1.webp" alt="Affiche 1" class="cheers-poster" (click)="openLightbox('assets/partenaires/ledouceur/affiche1.webp')" />
+        <img src="assets/partenaires/ledouceur/affiche2.webp" alt="Affiche 2" class="cheers-poster" (click)="openLightbox('assets/partenaires/ledouceur/affiche2.webp')" />
+        <img src="assets/partenaires/ledouceur/affiche3.webp" alt="Affiche 3" class="cheers-poster" (click)="openLightbox('assets/partenaires/ledouceur/affiche3.webp')" />
+        <img src="assets/partenaires/ledouceur/affiche4.webp" alt="Affiche 4" class="cheers-poster" (click)="openLightbox('assets/partenaires/ledouceur/affiche4.webp')" />
+        <img src="assets/partenaires/ledouceur/affiche5.webp" alt="Affiche 5" class="cheers-poster" (click)="openLightbox('assets/partenaires/ledouceur/affiche5.webp')" />
+        <img src="assets/partenaires/ledouceur/affiche6.webp" alt="Affiche 6" class="cheers-poster" (click)="openLightbox('assets/partenaires/ledouceur/affiche6.webp')" />
+      </div>
+      <div id="lightbox" class="lightbox" *ngIf="showLightbox" (click)="closeLightbox()">
+        <img [src]="lightboxImage" alt="Agrandissement">
+      </div>
+    </section>
+  
+    <!-- Bouton retour -->
+    <div class="back-to-clients">
+      <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+        <i class="fas fa-arrow-left"></i> Retour aux clients
+      </a>
+    </div>
+  </div>
+  

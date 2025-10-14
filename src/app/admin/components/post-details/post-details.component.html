@@ -1,0 +1,162 @@
+<div class="post-details-container" *ngIf="post">
+
+  <!-- Reading Progress -->
+  <div class="reading-progress">
+    <div class="reading-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Floating actions -->
+  <div class="floating-actions">
+    <button class="floating-btn" title="Share" aria-label="Share"><i class="fas fa-share-alt"></i></button>
+    <button class="floating-btn secondary" title="Bookmark" aria-label="Bookmark"><i class="fas fa-bookmark"></i></button>
+  </div>
+
+  <!-- Hero -->
+ <header class="post-hero"
+        [class.video]="!coverIsImage"
+        [style.background-image]="headerBgSafe">
+
+    <div class="hero-scrim"></div>
+
+    <!-- If cover is a video, render it -->
+    <video *ngIf="!coverIsImage && coverVideoUrl"
+           class="hero-video"
+           [src]="coverVideoUrl"
+           playsinline
+           controls
+           preload="metadata"></video>
+
+    <div class="hero-inner">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <span class="crumb">Blog</span>
+        <span class="crumb-sep">/</span>
+        <span class="crumb">{{ post.category }}</span>
+      </nav>
+
+      <h1 class="post-title">{{ post.title }}</h1>
+
+      <div class="meta-row">
+        <img src="assets/default-avatar.png" [alt]="post.authorName" class="author-avatar">
+        <div class="meta-col">
+          <div class="author-name">{{ post.authorName }}</div>
+          <div class="meta-line">
+            <span class="meta">{{ post.date }}</span>
+            <span class="dot">•</span>
+            <span class="meta">{{ post.readTime }}</span>
+          </div>
+        </div>
+
+        <span class="category-chip">{{ post.category }}</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="content-wrapper">
+    <div class="content-grid">
+      <article class="content-col">
+        <div class="prose">
+          <p>{{ post.description }}</p>
+        </div>
+
+       
+
+        <!-- Share footer -->
+        <div class="share-footer">
+          <span class="share-label">Partager:</span>
+          <button class="share-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></button>
+          <button class="share-btn" aria-label="X"><i class="fab fa-x-twitter"></i></button>
+          <button class="share-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></button>
+          <button class="share-btn" aria-label="Copy Link"><i class="fas fa-link"></i></button>
+        </div>
+      </article>
+
+      <aside class="sidebar-col">
+        <div class="side-card">
+          <div class="side-title">À propos de l’auteur</div>
+          <div class="side-author">
+            <div class="side-avatar">{{ post.authorName?.[0] || 'A' }}</div>
+            <div class="side-info">
+              <div class="side-name">{{ post.authorName }}</div>
+              <div class="side-role">Contributor</div>
+            </div>
+          </div>
+          <button class="side-btn">Suivre</button>
+        </div>
+
+        <div class="side-card">
+          <div class="side-title">Catégorie</div>
+          <div class="side-pills">
+            <span class="pill">{{ post.category }}</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Comments -->
+  <section class="comments-wrap">
+    <div class="comments-header">
+      <h2>Commentaires</h2>
+      <span class="pill">{{ comments.length }}</span>
+    </div>
+
+    <div class="add-comment">
+      <div class="input-row">
+        <img class="me-avatar" src="assets/default-user.png" alt="You">
+        <div class="input-col">
+          <textarea [(ngModel)]="newComment"
+                    class="comment-input"
+                    placeholder="Écrire un commentaire…"
+                    maxlength="500"
+                    (input)="updateCount()"></textarea>
+          <div class="input-footer">
+            <span class="count">{{ charCount }}/500</span>
+            <div class="actions">
+              <button class="btn-ghost" (click)="newComment=''; updateCount()" [disabled]="!newComment?.length">Effacer</button>
+              <button class="btn-primary" (click)="submitComment()" [disabled]="!newComment?.trim()">
+                <i class="fas fa-paper-plane"></i> Publier
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comments-list" *ngIf="comments.length > 0">
+      <div class="comment-card" *ngFor="let comment of comments">
+        <div class="comment-head">
+          <img [src]="comment.author.photo || 'assets/default-user.png'"
+               [alt]="comment.author.username"
+               class="commenter-avatar">
+
+          <div class="ch-meta">
+            <div class="ch-top">
+              <span class="comment-author">{{ comment.author.username }}</span>
+              <span class="badge-lite">Membre</span>
+            </div>
+            <div class="ch-sub">{{ comment.createdAt | date:'mediumDate' }}</div>
+          </div>
+
+          <div class="ch-cta">
+            <button class="chip-btn" [class.active]="comment.isLiked" (click)="likeComment(comment)">
+              <i class="fas fa-heart"></i> <span>{{ comment.likeCount || 0 }}</span>
+            </button>
+            <button class="chip-btn"><i class="fas fa-reply"></i> Répondre</button>
+            <button class="chip-btn more"><i class="fas fa-ellipsis-h"></i></button>
+          </div>
+        </div>
+
+        <div class="comment-body">{{ comment.content }}</div>
+      </div>
+    </div>
+
+    <div class="empty-comments" *ngIf="comments.length === 0">
+      <div class="empty-card">
+        <div class="empty-icon">✳️</div>
+        <h3>Aucun commentaire</h3>
+        <p>Soyez le premier à partager votre avis.</p>
+      </div>
+    </div>
+  </section>
+</div>

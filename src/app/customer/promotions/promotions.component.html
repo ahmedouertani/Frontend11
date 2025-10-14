@@ -1,0 +1,28 @@
+<div class="main-content">
+
+    <!-- Formulaire d'édition -->
+
+    <!-- Liste des Coupons -->
+    <div class="tickets-grid">
+      <mat-card *ngFor="let copon of copons" class="ticket-card">
+        <div class="ticket-header">
+          <h3>{{ copon.name }}</h3>
+          <span class="badge">-{{ copon.discount }}%</span>
+        </div>
+        <div class="ticket-body">
+          <p><strong>Code :</strong> {{ copon.code }}</p>
+          <p><strong>Expire le :</strong> {{ copon.expirationDate | date: 'dd/MM/yyyy' }}</p>
+          <p><strong>Description :</strong> {{ copon.description }}</p>
+  
+          <div *ngIf="copon.img">
+            <img [src]="'data:image/jpeg;base64,' + copon.img" class="copon-image" />
+          </div>
+        </div>
+        <button mat-icon-button (click)="copyCode(copon.code)" matTooltip="Copier le code">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+      </mat-card>
+    </div>
+
+  </div>
+  

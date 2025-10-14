@@ -1,0 +1,109 @@
+/* Conteneur principal */
+.container {
+  background-color: #ffffff;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titres */
+h2, h5 {
+  text-align: center;
+  color: #333;
+}
+
+/* Formulaires */
+mat-form-field {
+  width: 100%;
+}
+
+/* Badges créneaux réservés */
+.reserved-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.reserved-badge {
+  background-color: #ffcdd2;
+  color: #c62828;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+/* Message succès */
+.text-success {
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+/* Alertes */
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+/* Bouton principal */
+button {
+  margin-top: 20px;
+}
+
+/* Spinner */
+.loading-spinner {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Table des rendez-vous */
+.table-responsive {
+  margin-top: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #1976d2;
+  color: white;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Icônes vide */
+.empty-icon {
+  font-size: 48px;
+  color: #bdbdbd;
+}
+
+/* Message si aucun rendez-vous */
+.text-center {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Warning, error, success snackbars personnalisés */
+.warning-snackbar {
+  background-color: #ffa000 !important;
+}
+
+.error-snackbar {
+  background-color: #e53935 !important;
+}
+
+.success-snackbar {
+  background-color: #43a047 !important;
+}

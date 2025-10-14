@@ -1,0 +1,47 @@
+<div class="main-content">
+  <div class="section-container">
+    <form [formGroup]="searchProductForm" (ngSubmit)="submitForm()">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Entrer un mot-clé</mat-label>
+        <input matInput formControlName="title" placeholder="Nom du service">
+        <button mat-icon-button matSuffix type="submit" [disabled]="searchProductForm.invalid">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+
+    <div class="service-grid">
+      <div *ngFor="let service of services" class="service-card" >
+        <img *ngIf="service.base64Img" [src]="'data:image/png;base64,' + service.base64Img" alt="{{ service.nom }}" (click)="goToDetail(service.id)">
+        <h4>{{ service.nom }}</h4>
+        <p>{{ service.description }}</p>
+        <span class="category">Catégorie : {{ service.categoryName }}</span>
+        <span class="category">Prix : {{ service.prix }} TND</span>
+        <div class="product-status">
+          <strong>Statut :</strong> {{ service.status }}
+        </div>
+        
+        <div class="status-radio">
+          <mat-radio-group
+            [value]="service.status"
+            (change)="changeStatus(service.id, $event.value)"
+            class="status-radio-group">
+            <mat-radio-button value="ACTIF">Actif</mat-radio-button>
+            <mat-radio-button value="ANNULE">Inactif</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="actions">
+          <button mat-raised-button color="primary" [routerLink]="['/admin/update-product', service.id]">Modifier</button>
+        </div>
+        <div> <a [routerLink]="['/admin/service', service.id, 'media']">
+          <button mat-button color="primary">
+            <mat-icon>add_photo_alternate</mat-icon> Ajouter Médias
+          </button>
+        </a></div>
+        
+      </div>
+    </div>
+
+  </div>
+</div>
+

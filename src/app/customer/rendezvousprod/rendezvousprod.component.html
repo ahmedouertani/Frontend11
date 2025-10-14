@@ -1,0 +1,41 @@
+<div class="rendezvous-container">
+    <mat-card class="rendezvous-card">
+      <h2 class="title">Prendre un rendez-vous</h2>
+      <form>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nom complet</mat-label>
+          <input matInput placeholder="Votre nom">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" placeholder="exemple@email.com">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Téléphone</mat-label>
+          <input matInput type="tel" placeholder="+216...">
+        </mat-form-field>
+  
+        <div class="row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Date du rendez-vous</mat-label>
+            <input matInput type="date">
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Heure</mat-label>
+            <input matInput type="time">
+          </mat-form-field>
+        </div>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Objet du rendez-vous</mat-label>
+          <textarea matInput rows="4" placeholder="Votre message..."></textarea>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="submit-btn" color :white>Envoyer</button>
+      </form>
+    </mat-card>
+  </div>
+  

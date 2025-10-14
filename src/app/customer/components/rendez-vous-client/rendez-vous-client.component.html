@@ -1,0 +1,99 @@
+<div class="container mt-5 p-4 bg-white rounded shadow">
+  <h2 class="mb-4">{{ selectedRendezVous ? '✏️ Modifier un rendez-vous' : '📅 Prendre un rendez-vous' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <!-- Choisir une date -->
+    <mat-form-field appearance="fill" class="w-100 mb-3">
+      <mat-label>Choisir une date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" (dateChange)="onDateChange($event)" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.get('date')?.hasError('required')">La date est requise</mat-error>
+    </mat-form-field>
+
+    <!-- Créneaux réservés -->
+    <div *ngIf="form.get('date')?.value" class="mb-3">
+      <h5>Créneaux réservés :</h5>
+      <div *ngIf="getReservedHoursForSelectedDate().length > 0" class="reserved-slots">
+        <span class="reserved-badge" *ngFor="let hour of getReservedHoursForSelectedDate()">
+          {{ hour }} ❌
+        </span>
+      </div>
+      <div *ngIf="getReservedHoursForSelectedDate().length === 0" class="text-success">
+        ✅ Aucun créneau réservé pour cette date
+      </div>
+    </div>
+
+    <!-- Choisir une heure -->
+    <mat-form-field appearance="fill" class="w-100 mb-3" *ngIf="availableHours.length > 0">
+      <mat-label>Choisir une heure</mat-label>
+      <mat-select formControlName="heure" (selectionChange)="onHourChange($event.value)">
+        <mat-option *ngFor="let hour of availableHours" [value]="hour">{{ hour }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('heure')?.hasError('required')">L'heure est requise</mat-error>
+    </mat-form-field>
+
+    <!-- Message pas d'heure -->
+    <div *ngIf="form.get('date')?.value && availableHours.length === 0" class="alert alert-warning mt-2">
+      ⚠️ Tous les créneaux sont réservés pour cette date
+    </div>
+
+    <!-- Soumission -->
+    <button mat-raised-button color="primary" class="w-100 mt-3" [disabled]="form.invalid || isSlotTaken">
+      <mat-icon>check_circle</mat-icon> {{ selectedRendezVous ? 'Modifier' : 'Confirmer' }}
+    </button>
+  </form>
+
+  <hr class="my-4">
+
+  <!-- Liste de rendez-vous passés -->
+  <div *ngIf="rendezvousList.length > 0" class="rendezvous-table">
+    <h3 class="mb-3">📋 Mes Rendez-vous passés</h3>
+    <table class="table table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Date</th>
+          <th>Heure</th>
+          <th>Statut</th>
+          <th>Action</th> <!-- 🛠️ Ajouter cette colonne -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rdv of rendezvousList">
+          <td>{{ rdv.date }}</td>
+          <td>{{ rdv.heure }}</td>
+          <td>
+            <span [ngClass]="{
+              'text-success': rdv.status === 'CONFIRME',
+              'text-warning': rdv.status === 'ENATTENTE',
+              'text-danger': rdv.status === 'ANNULLEE'
+            }">
+              {{ rdv.status }}
+            </span>
+          </td>
+          <td>
+            <!-- Action : si ENATTENTE ou CONFIRME afficher bouton Annuler -->
+            <button *ngIf="rdv.status !== 'ANNULLEE'" 
+                    mat-stroked-button 
+                    color="warn"
+                    (click)="annulerRendezVous(rdv.id)">
+              ❌ Annuler
+            </button>
+
+            <!-- Action : si ANNULLEE afficher bouton Modifier -->
+            <button *ngIf="rdv.status === 'ANNULLEE'" 
+                    mat-stroked-button 
+                    color="primary"
+                    (click)="modifierRendezVous(rdv)">
+              ✏️ Modifier
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="rendezvousList.length === 0" class="text-center mt-4">
+    <p>Vous n'avez aucun rendez-vous encore</p>
+  </div>
+</div>

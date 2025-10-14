@@ -1,0 +1,71 @@
+<div class="main-content">
+  <div class="form-container">
+    <h2 class="section-title">Liste des Clients Tansik Prod</h2>
+
+    <!-- Loader -->
+    <div *ngIf="isLoading" class="loading-spinner">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <!-- Liste des clients -->
+    <mat-card *ngIf="!isLoading">
+      <mat-card-content>
+        <div class="table-wrapper">
+          <table mat-table [dataSource]="clients" class="mat-elevation-z8 client-table">
+
+            <!-- Nom -->
+            <ng-container matColumnDef="nom">
+              <th mat-header-cell *matHeaderCellDef>Nom</th>
+              <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
+            </ng-container>
+
+            <!-- Email -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            </ng-container>
+
+            <!-- Téléphone -->
+            <ng-container matColumnDef="telephone">
+              <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+              <td mat-cell *matCellDef="let element">{{ element.telephone }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="compteStatus">
+              <th mat-header-cell *matHeaderCellDef>Compte Status</th>
+              <td mat-cell *matCellDef="let element">{{ element.compteStatus || 'non défini' }}</td>
+            </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="action-buttons">
+                  <button mat-stroked-button color="primary" [routerLink]="['/admin/modifiercomptes', element.id]">Modifier</button>
+
+                  <!-- Bouton Bloquer -->
+                  <button mat-stroked-button color="warn" *ngIf="element.compteStatus === 'DEBLOQUE'" (click)="bloquerClient(element.id)">
+                    Bloquer
+                  </button>
+                  
+                  <button mat-stroked-button color="primary" *ngIf="element.compteStatus === 'BLOQUE'" (click)="debloquerClient(element.id)">
+                    Débloquer
+                  </button>
+                  
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+
+        <!-- Aucun client -->
+        <div *ngIf="clients.length === 0" class="no-data-message">
+          Aucun client trouvé
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

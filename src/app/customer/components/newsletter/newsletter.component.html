@@ -1,0 +1,9 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="newsletter-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Votre email</mat-label>
+      <input matInput type="email" formControlName="email">
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">S’inscrire</button>
+  </form>
+  

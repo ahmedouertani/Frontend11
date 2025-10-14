@@ -1,0 +1,97 @@
+<div class="main-content">
+  <!-- Left side: Add Post Form -->
+  <div class="add-post-container">
+    <h2 class="page-title">Ajouter un Article</h2>
+
+    <form [formGroup]="postForm" (ngSubmit)="addPost()" class="post-form">
+
+      <!-- Upload image -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Image de l’Article</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <label class="file-upload-label">
+            <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput hidden>
+            <mat-icon>cloud_upload</mat-icon>
+            <span>{{ file ? file.name : 'Choisir une image' }}</span>
+            <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+              Parcourir
+            </button>
+          </label>
+
+          <div *ngIf="imagePreview" class="image-preview-container">
+            <img [src]="imagePreview" alt="Aperçu" class="image-preview">
+            <button mat-icon-button class="clear-image" (click)="clearImage()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Informations de base -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Détails de l’Article</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Titre</mat-label>
+            <input matInput formControlName="title" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows="3" required></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Catégorie</mat-label>
+            <mat-select formControlName="category" required>
+              <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Actions -->
+      <div class="form-actions">
+        <button mat-stroked-button type="button" (click)="navigateTo('/admin/posts')">
+          Annuler
+        </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="postForm.invalid || isSubmitting">
+          <mat-icon>save</mat-icon>
+          {{ isSubmitting ? 'Envoi en cours...' : 'Publier' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Right side: Liste des articles -->
+  <div class="list-post-container">
+    <h2 class="page-title">Liste des Articles</h2>
+
+    <mat-list>
+      <mat-list-item *ngFor="let post of posts" class="post-item">
+        
+        <!-- Image -->
+        <img matListAvatar [src]="post.image || 'assets/default.jpg'" alt="Image" class="post-thumb">
+
+        <!-- Post details -->
+        <div matLine class="post-info">
+          <span class="post-title">{{ post.title }}</span>
+          <span class="post-category">{{ post.category }}</span>
+          <p class="post-description">{{ post.description }}</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="post-actions">
+          <button mat-icon-button color="warn" (click)="deletePost(post.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

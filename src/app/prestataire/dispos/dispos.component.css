@@ -1,0 +1,39 @@
+.dispo-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.month-navigation span {
+  margin: 0 10px;
+  font-size: 1.2em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.cell {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cell.selected {
+  background-color: #ff0000;
+  color: white;
+}
+
+button[mat-raised-button] {
+  margin-top: 20px;
+}

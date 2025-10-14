@@ -1,0 +1,34 @@
+<div class="review-container">
+  <h2 class="title">📝 Laisser un avis</h2>
+
+  <form [formGroup]="reviewForm" (ngSubmit)="submitForm()" class="review-form">
+    <div *ngIf="reservationProdId">🛍️ Vous laissez un avis sur un service.</div>
+    <div *ngIf="reservationEventId">🎉 Vous laissez un avis sur un événement.</div>
+
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Note *</mat-label>
+      <mat-select formControlName="rating">
+        <mat-option *ngFor="let rate of [1,2,3,4,5]" [value]="rate">
+          {{ rate }} étoile{{ rate > 1 ? 's' : '' }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="reviewForm.get('rating')?.invalid">Note obligatoire</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description *</mat-label>
+      <textarea matInput formControlName="description" rows="5" placeholder="Exprimez votre avis..."></textarea>
+      <mat-error *ngIf="reviewForm.get('description')?.invalid">Ce champ est requis</mat-error>
+    </mat-form-field>
+
+    <div class="submit-section">
+      <button mat-raised-button color="primary" type="submit" 
+              [disabled]="reviewForm.invalid"
+              [attr.aria-disabled]="reviewForm.invalid">
+        ✅ Envoyer l'avis
+      </button>
+    </div>
+  </form>
+</div>

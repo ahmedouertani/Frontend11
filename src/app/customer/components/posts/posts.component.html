@@ -1,0 +1,37 @@
+<div class="posts-container">
+  <div class="posts-header">
+    <h1 class="posts-title">Latest Articles</h1>
+    <p class="posts-subtitle">Insights, tutorials, and thoughts on modern web development</p>
+  </div>
+
+  <div class="posts-grid">
+    <article class="post-card" 
+             *ngFor="let post of posts"
+             [routerLink]="['/admin/posts', post.id]"
+             style="cursor: pointer;">
+      <div class="post-image-wrapper">
+        <img [src]="post.image" [alt]="post.title" class="post-image">
+        <div class="post-overlay">
+          <span class="post-category">{{ post.category }}</span>
+        </div>
+      </div>
+
+      <div class="post-content">
+        <div class="post-meta">
+          <span class="post-author">{{ post.authorName }}</span>
+          <span class="post-divider">•</span>
+          <span class="post-date">{{ post.date }}</span>
+          <span class="post-divider">•</span>
+          <span class="post-read-time">{{ post.readTime }}</span>
+        </div>
+
+        <h2 class="post-title">{{ post.title }}</h2>
+<p class="post-description">
+  {{ isExpanded[post.id] ? post.description : (post.description | slice:0:150) + '...' }}
+  <span class="read-more" *ngIf="post.description.length > 150" (click)="toggleReadMore(post.id)">
+    {{ isExpanded[post.id] ? 'Lire moins' : 'Lire la suite' }}
+  </span>
+</p>      </div>
+    </article>
+  </div>
+</div>

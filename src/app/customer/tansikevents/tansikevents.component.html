@@ -1,0 +1,131 @@
+<div class="slider-container">
+  <div class="slider">
+    <div class="slide" *ngFor="let image of images; let i = index">
+      <picture>
+        <source media="(max-width: 768px)" [srcset]="image.src || image.src" />
+        <img [src]="image.src" [alt]="image.title" />
+      </picture>
+      <div class="slide-content">
+        <h3>{{ image.title }}</h3>
+        <p>{{ image.description }}</p>
+        <button class="read-more-btn" (click)="navigateTo(image.route)">Consulter page</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contrôles en bas -->
+  <div class="slider-controls">
+    <button class="slider-btn prev" (click)="handleButtonClick('prev')" aria-label="Slide précédente">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="slider-dots">
+      <span *ngFor="let image of images; let i = index" [class.active]="i === currentIndex"
+        (click)="goToSlide(i)" [attr.aria-label]="'Aller à la slide ' + (i + 1)"></span>
+    </div>
+    <button class="slider-btn next" (click)="handleButtonClick('next')" aria-label="Slide suivante">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+ <!-- titre sous appbar welcome -->
+  <div class="banner-container">
+    <div class="banner-scroll">
+      <span><strong class="highlight">WELCOME TO TANSIK EVENTS</strong></span>
+    </div>
+  </div>
+
+  <div class="tansikevents-home-container">
+    <div class="tansikevents-content-wrapper">
+      <div class="tansikevents-logo-container">
+        <img src="assets/logoevents.webp" alt="Logo Tansik Events" class="tansikevents-logo-3d">
+      </div>
+      <div class="tansikevents-text-container">
+        <h4 class="tansikevents-title">TANSIK EVENTS</h4>
+        <p class="tansikevents-description">
+          Tansik Events se spécialise dans l’organisation d’événements exceptionnels : mariages, séminaires, anniversaires, inaugurations, soirées privées et autres occasions spéciales.
+          <br><br>
+          Nous assurons la gestion complète de chaque projet, de la planification à la réalisation, dans le but de créer une expérience mémorable, fidèle à vos attentes et à la hauteur de vos ambitions          <br><br>
+          Chaque événement est minutieusement pensé dans les moindres détails afin de garantir une réussite totale.      </div>
+    </div>
+  </div>
+
+<!-- Category Buttons (only once at the top) -->
+ 
+<div class="events-buttons text-center my-5">
+  <button 
+    class="btn-section"ng ng
+    *ngFor="let category of eventCategories"
+    (click)="scrollTo(category.id)">
+    <i class="{{ category.iconClass }} me-2"></i> {{ category.name }}
+  </button>
+</div>
+
+<!-- Category Sections -->
+ 
+<div class="container-fluid services-cube-grid">
+  <section [id]="category.id" class="prod-section" *ngFor="let category of eventCategories">
+    <div class="text-center my-5">
+      <h2 class="branding-title" style="color: #cead57;">
+        <i class="{{ category.iconClass }} me-2"></i> {{ category.name }}
+        <button class="btn-toggle" (click)="toggleCategoryVisibility(category.id)">
+          <i class="fas" [ngClass]="categoryVisibility[category.id] ? 'fa-eye-slash' : 'fa-eye'"></i>
+        </button>
+      </h2>
+      <p class="branding-subtitle">{{ category.description }}</p>
+    </div>
+
+    <!-- Si la catégorie est visible, affiche les services -->
+    <div class="row" *ngIf="categoryVisibility[category.id]">
+      <div class="col-md-4 mb-4" *ngFor="let service of groupedServices[category.id] || []">
+        <div class="service-cube">
+          <!-- Image avec overlay -->
+          <div class="cube-image">
+            <img [src]="'data:image/webp;base64,' + service.base64Img" alt="Service image" />
+            <div class="cube-overlay">
+              <button class="cube-btn" (click)="goToDetail(service.id, 'event')">
+                Découvrez-nous
+              </button>
+            </div>
+          </div>
+
+          <!-- Texte et bouton -->
+          <div class="cube-content-flex">
+            <div class="cube-text-left">
+              <h4>{{ service.nom }}</h4>
+              <p>{{ service.description }}</p>
+              <span>{{service.prix}}</span> <b style="margin-left: 10px;">TND</b>
+            </div>
+            <div class="cube-button-right" *ngIf="service.type !== 'event' && service.type !== 'events'">
+              <button class="btn-add" (click)="reserver(service.id)">
+                <i class="fas fa-plus-circle me-2"></i> Résérver maintenant 
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+<button 
+  *ngIf="showFinalizeButton" style=" position: fixed;
+  background: linear-gradient(to right, #cead57, #6e5600);
+  
+  width: 100px;
+  height: 70px;
+  bottom: 100px;
+  right: 30px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);"
+  mat-fab
+  color="accent"
+  class="floating-btn"
+  (click)="goToPlaceOrder() " >
+  <p style="color: black;">Finaliser résérvation</p>
+</button>

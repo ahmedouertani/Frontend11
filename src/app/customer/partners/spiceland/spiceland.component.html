@@ -1,0 +1,50 @@
+<div class="cheers-page container py-5">
+    <!-- Logo + Titre -->
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logospiceland.webp" alt="Logo Spice Land" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Spice Land - Cuisine Authentique</h2>
+      <p class="cheers-description">
+        Notre collaboration avec Spice Land a mis en lumière leur savoir-faire culinaire à travers des visuels alléchants,
+        un branding coloré et une stratégie sociale immersive.
+        <br />
+        L’objectif : transmettre l’expérience unique de leur cuisine aux clients en ligne comme en salle.
+      </p>
+    </div>
+  
+    <!-- Design Graphique -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Design Graphique</h2>
+      <div class="cheers-gallery">
+        <img src="assets/partenaires/spiceland/affiche1.webp" alt="Affiche 1" class="cheers-poster" (click)="openLightbox('assets/partenaires/spiceland/affiche1.webp')" />
+        <img src="assets/partenaires/spiceland/affiche2.webp" alt="Affiche 2" class="cheers-poster" (click)="openLightbox('assets/partenaires/spiceland/affiche2.webp')" />
+        <img src="assets/partenaires/spiceland/affiche3.webp" alt="Affiche 3" class="cheers-poster" (click)="openLightbox('assets/partenaires/spiceland/affiche3.webp')" />
+        <img src="assets/partenaires/spiceland/affiche4.webp" alt="Affiche 4" class="cheers-poster" (click)="openLightbox('assets/partenaires/spiceland/affiche4.webp')" />
+        <img src="assets/partenaires/spiceland/affiche5.webp" alt="Affiche 5" class="cheers-poster" (click)="openLightbox('assets/partenaires/spiceland/affiche5.webp')" />
+        <img src="assets/partenaires/spiceland/affiche6.webp" alt="Affiche 6" class="cheers-poster" (click)="openLightbox('assets/partenaires/spiceland/affiche6.webp')" />
+        <img src="assets/partenaires/spiceland/affiche7.webp" alt="Affiche 7" class="cheers-poster" (click)="openLightbox('assets/partenaires/spiceland/affiche7.webp')" />
+        <img src="assets/partenaires/spiceland/affiche8.webp" alt="Affiche 8" class="cheers-poster" (click)="openLightbox('assets/partenaires/spiceland/affiche8.webp')" />
+      </div>
+      <div id="lightbox" class="lightbox" *ngIf="showLightbox" (click)="closeLightbox()">
+        <img [src]="lightboxImage" alt="Agrandissement">
+      </div>
+    </section>
+  
+    <!-- Création de contenu -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Création de contenu</h2>
+      <div class="cheers-reel-container">
+        <video class="cheers-reel" controls muted loop>
+          <source src="assets/partenaires/spiceland/videospiceland.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+      </div>
+    </section>
+  
+    <!-- Bouton retour -->
+    <div class="back-to-clients">
+      <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+        <i class="fas fa-arrow-left"></i> Retour aux clients
+      </a>
+    </div>
+  </div>
+  

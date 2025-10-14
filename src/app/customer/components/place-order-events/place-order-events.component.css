@@ -1,0 +1,189 @@
+/* Conteneur principal */
+.reservation-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Titres */
+h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f0f2f5;
+}
+
+/* Formulaire */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+/* Bouton de soumission */
+.submit-btn {
+  background: linear-gradient(to right, #cead57, #6e5600);
+  color: black;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 12px;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Grille des services */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Carte de service */
+.service-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+}
+
+.service-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.service-content {
+  padding: 1.2rem;
+}
+
+.service-name {
+  font-size: 1.1rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.service-category, .service-price {
+  color: #4a5568;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.delete-btn {
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+/* Bouton flottant */
+.floating-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background: linear-gradient(to right, #cead57, #6e5600);
+  color: black;
+  width: 120px;
+  height: 70px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.floating-btn:hover {
+  transform: scale(1.05);
+}
+
+.floating-btn p {
+  font-size: 0.8rem;
+  margin: 0;
+  text-align: center;
+}
+
+/* Alertes */
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .reservation-container {
+    padding: 1.5rem;
+    margin: 30px auto;
+  }
+  
+  h2 {
+    font-size: 1.7rem;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .floating-btn {
+    width: 100px;
+    height: 60px;
+    bottom: 80px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reservation-container {
+    padding: 1rem;
+    margin: 20px auto;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .floating-btn {
+    width: 80px;
+    height: 50px;
+    bottom: 60px;
+    right: 15px;
+  }
+  
+  .floating-btn p {
+    font-size: 0.7rem;
+  }
+}

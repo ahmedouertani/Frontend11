@@ -1,0 +1,25 @@
+<div *ngIf="collab && !isLoading" class="collab-detail">
+  <div class="header">
+    <img [src]="collab.logo" [alt]="collab.nom" class="logo" />
+    <h1>{{ collab.nom }}</h1>
+  </div>
+
+  <p class="description">{{ collab.description }}</p>
+
+<h2>Galerie</h2>
+<div class="gallery">
+  <div *ngFor="let media of collab.gallery" class="gallery-item">
+    <!-- Check if it's video by checking prefix -->
+    <ng-container *ngIf="media.includes('video'); else imageTemplate">
+      <video width="320" height="240" controls>
+        <source [src]="media" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </ng-container>
+
+    <ng-template #imageTemplate>
+      <img [src]="media" alt="gallery item" width="320" />
+    </ng-template>
+  </div>
+</div>
+

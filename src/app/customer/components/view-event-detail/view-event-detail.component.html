@@ -1,0 +1,105 @@
+<!-- 📷 Section des images -->
+<h3 class="media-title">📷 Collection</h3>
+
+<div class="media-section" *ngIf="mediaList.length > 0 && hasImages()">
+  <div class="media-grid">
+    <ng-container *ngFor="let media of mediaList">
+      <img
+        *ngIf="media.type === 'IMAGE'"
+        [src]="'data:image/jpeg;base64,' + media.base64"
+        class="media-image"
+        alt="Image"
+        (click)="openOverlay(media, 'image')"
+      />
+    </ng-container>
+  </div>
+</div>
+
+<!-- 🎬 Section des vidéos -->
+<h3 class="media-title">🎬 Vidéos</h3>
+
+<div class="media-section" *ngIf="mediaList.length > 0 && hasVideos()">
+  <div class="media-grid">
+    <ng-container *ngFor="let media of mediaList">
+      <video
+        *ngIf="media.type === 'VIDEO'"
+        class="media-video"
+        controls
+        (click)="openOverlay(media, 'video')"
+      >
+        <source [src]="'data:video/mp4;base64,' + media.base64" type="video/mp4" />
+      </video>
+    </ng-container>
+  </div>
+</div>
+
+<!-- 🖼️ Overlay plein écran -->
+<div
+  class="media-overlay"
+  *ngIf="overlayMedia"
+  (click)="closeOverlay()"
+  role="dialog"
+  aria-label="Affichage plein écran"
+>
+  <div class="close-overlay" role="button" aria-label="Fermer">×</div>
+  <ng-container *ngIf="overlayType === 'image'">
+    <img [src]="'data:image/jpeg;base64,' + overlayMedia.base64" alt="Image en plein écran" />
+  </ng-container>
+  <ng-container *ngIf="overlayType === 'video'">
+    <video controls autoplay>
+      <source [src]="'data:video/mp4;base64,' + overlayMedia.base64" type="video/mp4" />
+    </video>
+  </ng-container>
+</div>
+
+
+
+<div class="detail-card-container">
+  <div class="info-section">
+    <h2>{{ services.nom }}</h2>
+    <p>{{ services.description }}</p>
+    <p *ngIf="services.prix">💰 Prix : {{ services.prix }} TND</p>
+
+    <div class="review-section" *ngIf="reviews.length > 0">
+      <h3>🗣️ Avis</h3>
+      <div *ngFor="let review of reviews" class="review-comment">
+        <div class="review-header">
+          <strong class="username">{{ review.userName }}</strong>
+          <span class="rating">⭐ {{ review.rating }}/5</span>
+        </div>
+        <p class="description">"{{ review.description }}"</p>
+      </div>
+    </div>
+
+    <div *ngIf="reviews.length === 0" class="no-review">
+      Aucun avis disponible.
+    </div>
+  </div>
+
+  <div class="image-section">
+    <img *ngIf="services.processedImg" [src]="services.processedImg" class="side-img" />
+  </div>
+
+  <button  style=" 
+  background: linear-gradient(to right, #cead57, #6e5600);" class="btn-float-add" (click)="reserver(services.id)">
+    <i class="fas fa-plus-circle"></i> Résérver maintenant
+  </button>
+</div>
+
+<button 
+  *ngIf="showFinalizeButton"
+  mat-fab
+  color="accent"
+  class="floating-btn"
+  (click)="goToPlaceOrder()">
+  <p style="color: black;">Finaliser résérvation</p>
+</button>
+
+<!-- 🔍 Zoom sur média -->
+<div *ngIf="selectedMedia" class="media-overlay" (click)="closeOverlay()">
+  <span class="close-overlay" (click)="closeOverlay()">&times;</span>
+  <img *ngIf="selectedMedia.type === 'IMAGE'" [src]="'data:image/jpeg;base64,' + selectedMedia.base64" />
+  <video *ngIf="selectedMedia.type === 'VIDEO'" controls autoplay>
+    <source [src]="'data:video/mp4;base64,' + selectedMedia.base64" type="video/mp4" />
+  </video>
+</div>

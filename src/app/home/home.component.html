@@ -1,0 +1,274 @@
+<!-- H1 accessible (SEO) -->
+<h1 class="sr-only">Agence marketing &amp; événementiel à Tunis – Tansik Group</h1>
+
+<!-- HERO / SLIDER -->
+<section class="slider-section" aria-label="Mises en avant">
+  <div class="slider-container">
+    <div class="slider-gradient"></div>
+    <div class="slider">
+      <div class="slide" *ngFor="let image of images; let i = index" role="group" [attr.aria-roledescription]="'slide ' + (i+1) + ' sur ' + images.length">
+        <picture>
+          <source media="(max-width: 768px)" [srcset]="image.src" />
+          <img
+            [src]="image.src"
+            [alt]="image.title + ' – ' + image.description"
+            [attr.loading]="i === 0 ? null : 'lazy'"
+            width="1920" height="1080"
+          />
+        </picture>
+
+        <div class="slide-content" [class.active]="i === currentIndex">
+          <div class="chip">Nouveau</div>
+          <h2 class="slide-title">{{ image.title }}</h2>
+          <p class="slide-subtitle">{{ image.description }}</p>
+          <div class="slide-cta">
+            <button class="btn primary" (click)="navigateTo(image.route)" [attr.aria-label]="'Consulter : ' + image.title">
+              Consulter la page
+              <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="slider-controls" aria-label="Contrôles du slider">
+      <button class="nav-btn prev" (click)="handleButtonClick('prev')" aria-label="Slide précédente">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <div class="slider-dots" role="tablist">
+        <button *ngFor="let image of images; let i = index"
+                class="dot"
+                [class.active]="i === currentIndex"
+                role="tab"
+                [attr.aria-selected]="i === currentIndex"
+                [attr.aria-label]="'Aller à la slide ' + (i + 1)"
+                (click)="goToSlide(i)"></button>
+      </div>
+
+      <button class="nav-btn next" (click)="handleButtonClick('next')" aria-label="Slide suivante">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Vague décorative -->
+    <svg class="wave-sep" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,64L60,58.7C120,53,240,43,360,42.7C480,43,600,53,720,69.3C840,85,960,107,1080,106.7C1200,107,1320,85,1380,74.7L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- Bandeau "welcome" -->
+<div class="banner-container will-appear" aria-hidden="true">
+  <div class="banner-scroll">
+    <span><strong class="highlight">WELCOME TO TANSIK GROUPE</strong></span>
+  </div>
+</div>
+
+<!-- TANSIK GROUP -->
+<section class="tansik-home-container will-appear" id="tansik-group">
+  <div class="tansik-content-wrapper">
+    <div class="tansik-logo-container">
+      <img src="assets/logogroup.webp" alt="Tansik Group – logo" class="tansik-logo-3d" width="300" height="300" />
+    </div>
+
+    <div class="tansik-text-container glass">
+      <h2 class="tansik-title">TANSIK GROUP</h2>
+      <p class="tansik-description">
+        Fondé en janvier 2023, Tansik Group réunit deux domaines d’expertise : le marketing et l’événementiel via Tansik Prod &amp; Tansik Events.
+        <br><br>
+        Campagnes percutantes, événements inoubliables : nous transformons vos visions en réussites concrètes, avec une approche globale et sur-mesure.
+      </p>
+      <div class="btn-row">
+        <button class="btn ghost" (click)="navigateTo('/customer/tansikprod')">Découvrir Prod</button>
+        <button class="btn ghost" (click)="navigateTo('/customer/tansikevents')">Découvrir Events</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pourquoi nous choisir -->
+<section class="choisir-section will-appear" aria-labelledby="why-title">
+  <div class="choisir-container">
+    <h2 class="choisir-title" id="why-title">Pourquoi Nous Choisir ?</h2>
+    <div class="choisir-cards">
+      <article class="choisir-card">
+        <div class="choisir-icon"><i class="fas fa-handshake"></i></div>
+        <h3>Partenaire engagé</h3>
+        <p>Des relations durables basées sur l’écoute, le respect et le professionnalisme.</p>
+      </article>
+      <article class="choisir-card">
+        <div class="choisir-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Réactivité &amp; Efficacité</h3>
+        <p>Réponse rapide &amp; solutions concrètes adaptées à vos objectifs.</p>
+      </article>
+      <article class="choisir-card">
+        <div class="choisir-icon"><i class="fas fa-brain"></i></div>
+        <h3>Créativité</h3>
+        <p>Des idées fraîches pour démarquer durablement votre marque.</p>
+      </article>
+      <article class="choisir-card">
+        <div class="choisir-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Résultats mesurables</h3>
+        <p>Focus ROI : des résultats concrets et suivis.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TANSIK PROD -->
+<section class="tansik-home-container will-appear" id="tansik-prod">
+  <div class="tansik-content-wrapper">
+    <div class="tansik-logo-container">
+      <img src="assets/logoprod.webp" alt="Tansik Prod – logo" class="tansik-logo-3d" width="300" height="300" loading="lazy" />
+    </div>
+
+    <div class="tansik-text-container glass">
+      <h2 class="tansik-title">TANSIK PROD</h2>
+      <p class="tansik-description">
+        Marketing on &amp; offline : contenu, design, vidéo, photo, sites web, social media, sponsoring &amp; impression. Stratégie + créativité = impact maximal.
+      </p>
+      <div class="btn-row">
+        <button class="btn primary" (click)="navigateTo('/customer/tansikprod')">Voir nos services</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Réseaux & contact (Prod) -->
+<section class="social-contact-section will-appear" aria-label="Réseaux Tansik Prod">
+  <div class="container py-5">
+    <div class="row g-4 align-items-center justify-content-center text-center">
+      <div class="col-md-4">
+        <div class="social-box">
+          <i class="fab fa-facebook-f fa-2x mb-3 text-primary"></i>
+          <h3 class="fw-bold">Facebook</h3>
+          <p><a href="https://www.facebook.com/tansik.production?locale=fr_FR" target="_blank" rel="noopener">TANSIK PROD</a></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="social-box">
+          <i class="fab fa-instagram fa-2x mb-3 text-danger"></i>
+          <h3 class="fw-bold">Instagram</h3>
+          <p><a href="https://www.instagram.com/tansik_prod/?hl=fr" target="_blank" rel="noopener">TANSIK_PROD</a></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="social-box">
+          <i class="fas fa-phone-alt fa-2x mb-3 text-success"></i>
+          <h3 class="fw-bold">Téléphone</h3>
+          <p><a href="tel:+21655189286">+216 55 189 286</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services PROD -->
+<section class="tansik-services-icons will-appear" aria-labelledby="services-prod-title">
+  <div class="services-header">
+    <h2 class="section-title" id="services-prod-title">Nos Services Prod</h2>
+    <div class="title-divider"></div>
+  </div>
+
+  <div class="services-grid">
+    <article class="service-card" *ngFor="let category of categoriesProd">
+      <div class="icon-wrapper">
+        <i [class]="category.iconClass || 'fas fa-cogs'"></i>
+      </div>
+      <div class="card-content">
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.description }}</p>
+        <button class="btn ghost" (click)="goToCategory(category.id)" [attr.aria-label]="'Découvrir le service ' + category.name">
+          En savoir plus <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Logos partenaires -->
+<section class="trusted-section-white will-appear" aria-labelledby="partners-title">
+  <h2 class="trusted-title" id="partners-title">Ils nous font confiance</h2>
+  <div class="logo-grid">
+    <div class="logo-box animate-logo" *ngFor="let collab of logos">
+      <div class="logo-skeleton" *ngIf="!collab.logo"></div>
+      <img [src]="collab.logo || 'assets/fallback-logo.png'"
+           [alt]="collab.nom + ' – partenaire Tansik'" width="150" height="80" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- TANSIK EVENTS -->
+<section class="home-presentation-container will-appear" id="tansik-events">
+  <div class="home-presentation-wrapper">
+    <div class="home-logo-container">
+      <img src="assets/logoevents.webp" alt="Tansik Events – logo" class="home-logo-3d" width="300" height="300" loading="lazy" />
+    </div>
+
+    <div class="home-text-container glass-gold">
+      <h2 class="home-title">TANSIK EVENTS</h2>
+      <p class="home-description">
+        Organisation complète : mariages, séminaires, inaugurations, soirées privées… Des expériences mémorables, pensées dans chaque détail.
+      </p>
+      <div class="btn-row">
+        <button class="btn gold" (click)="navigateTo('/customer/tansikevents')">
+          Voir nos services <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Réseaux & contact (Events) -->
+<section class="events-social-section will-appear" aria-label="Réseaux Tansik Events">
+  <div class="container py-5">
+    <div class="row g-4 align-items-center justify-content-center text-center">
+      <div class="col-md-4">
+        <div class="events-social-box">
+          <i class="fab fa-facebook-f fa-2x mb-3 text-warning"></i>
+          <h3 class="fw-bold">Facebook</h3>
+          <p><a href="https://www.facebook.com/profile.php?id=100083843397704&locale=fr_FR" target="_blank" rel="noopener">TANSIK EVENTS</a></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="events-social-box">
+          <i class="fab fa-instagram fa-2x mb-3 text-warning"></i>
+          <h3 class="fw-bold">Instagram</h3>
+          <p><a href="https://www.instagram.com/tansik.events/?hl=fr" target="_blank" rel="noopener">TANSIK_EVENTS</a></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="events-social-box">
+          <i class="fas fa-phone-alt fa-2x mb-3 text-warning"></i>
+          <h3 class="fw-bold">Téléphone</h3>
+          <p><a href="tel:+21655189190">+216 55 189 190</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services EVENTS -->
+<section class="events-services-section will-appear" aria-labelledby="services-events-title">
+  <div class="events-services-header">
+    <h2 class="events-section-title" id="services-events-title">Nos Services Events</h2>
+    <div class="events-title-divider"></div>
+  </div>
+
+  <div class="events-services-grid">
+    <article class="events-service-card" *ngFor="let category of categoriesEvents">
+      <div class="events-icon-wrapper">
+        <i [class]="category.iconClass || 'fas fa-star'"></i>
+      </div>
+      <div class="events-card-content">
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.description }}</p>
+        <button (click)="goToEventCategory(category.id)" class="btn gold" [attr.aria-label]="'Découvrir : ' + category.name">
+          En savoir plus <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </article>
+  </div>
+</section>

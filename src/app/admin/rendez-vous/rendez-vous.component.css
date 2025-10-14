@@ -1,0 +1,86 @@
+/* Styles généraux pour le conteneur */
+.container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Titre */
+h2 {
+  font-size: 2rem;
+  color: #007bff; /* Couleur primaire */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Table responsive */
+.table-responsive {
+  overflow-x: auto; /* Permet le défilement horizontal sur les petits écrans */
+}
+
+/* Styles de la table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+  word-wrap: break-word; /* Permet de couper les mots longs */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Styles pour les boutons d'action */
+.actions-btn {
+  display: flex;
+  gap: 10px; /* Espacement entre les boutons */
+}
+
+/* Responsive pour les écrans de 700px et moins */
+@media (max-width: 700px) {
+  .container {
+    padding: 15px 10px; /* Réduire le padding */
+    margin-top: 10px; /* Réduire la marge supérieure */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Réduire la taille du titre */
+  }
+
+  .table th, .table td {
+    padding: 8px; /* Réduire le padding des cellules */
+    font-size: 0.9rem; /* Réduire la taille de la police */
+  }
+
+  .actions-btn {
+    flex-direction: column; /* Empiler les boutons verticalement */
+    gap: 5px; /* Espacement réduit entre les boutons */
+  }
+}
+
+/* Styles pour les très petits écrans (jusqu'à 400px) */
+@media (max-width: 400px) {
+  .container {
+    padding: 10px; /* Réduire encore le padding */
+  }
+
+  h2 {
+    font-size: 1.3rem; /* Réduire la taille du titre */
+  }
+
+  .table th, .table td {
+    padding: 6px; /* Réduire le padding des cellules */
+    font-size: 0.85rem; /* Réduire la taille de la police */
+  }
+}

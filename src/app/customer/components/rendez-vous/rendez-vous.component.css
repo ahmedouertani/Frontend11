@@ -1,0 +1,60 @@
+/* Style global du container */
+.container {
+  max-width: 700px;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Style du titre */
+h2 {
+  font-weight: 600;
+  color: #0c125a; /* bleu foncé comme ton style */
+  margin-bottom: 20px;
+}
+
+/* Styles pour les badges des créneaux réservés */
+.reserved-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.reserved-badge {
+  background-color: #f44336; /* rouge clair */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* Texte vert quand il n'y a aucun créneau réservé */
+.text-success {
+  color: #4caf50;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* Bouton de confirmation */
+button[mat-raised-button] {
+  font-weight: 600;
+  font-size: 16px;
+  height: 48px;
+}
+
+/* Animation légère au hover sur bouton */
+button[mat-raised-button]:hover {
+  opacity: 0.9;
+}
+
+/* Alertes */
+.alert-warning {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 10px;
+  border-radius: 8px;
+}

@@ -1,0 +1,34 @@
+<div class="cheers-page container py-5">
+    <!-- Logo + Titre -->
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logodarmarwa.webp" alt="Logo Dar Marwa" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Dar Marwa - Salon de Beauté</h2>
+      <p class="cheers-description">
+        Nous avons accompagné Dar Marwa dans la valorisation de son image, en créant des visuels personnalisés et professionnels. Cette collaboration visait à refléter l'élégance et le savoir-faire de la marque, en mettant en avant ses prestations haut de gamme.
+      </p>
+    </div>
+  
+    <!-- ================= DESIGN GRAPHIQUE ================= -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Design Graphique</h2>
+      <div class="cheers-gallery">
+        <img src="assets/partenaires/darmarwa/affiche1.webp" alt="Affiche 1" class="cheers-poster" />
+        <img src="assets/partenaires/darmarwa/affiche2.webp" alt="Affiche 2" class="cheers-poster" />
+        <img src="assets/partenaires/darmarwa/affiche3.webp" alt="Affiche 3" class="cheers-poster" />
+        <img src="assets/partenaires/darmarwa/affiche4.webp" alt="Affiche 4" class="cheers-poster" />
+        <img src="assets/partenaires/darmarwa/affiche2.webp" alt="Affiche 2" class="cheers-poster" />
+        <img src="assets/partenaires/darmarwa/affiche1.webp" alt="Affiche 1" class="cheers-poster" />
+      </div>
+      <div id="lightbox" class="lightbox" (click)="closeLightbox()" *ngIf="showLightbox">
+        <img [src]="lightboxImage" alt="image agrandie">
+      </div>
+    </section>
+  
+    <!-- Bouton retour -->
+    <div class="back-to-clients">
+      <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+        <i class="fas fa-arrow-left"></i> Retour aux clients
+      </a>
+    </div>
+  </div>
+  

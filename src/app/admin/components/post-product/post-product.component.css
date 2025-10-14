@@ -1,0 +1,196 @@
+.main-content {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Container principal */
+.add-service-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Titre */
+.page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #0d47a1;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Formulaire général */
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Chaque section (mat-card) */
+.form-section {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Radio buttons (prod/events) */
+.radio-group {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.radio-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Upload image */
+.file-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  gap: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Aperçu image */
+.image-preview-container {
+  margin-top: 1rem;
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.clear-image {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Inputs */
+.form-field {
+  width: 100%;
+}
+
+/* Section Dates Indisponibles */
+.date-time-section {
+  margin-top: 2rem;
+}
+
+.date-time-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #0d47a1;
+}
+
+/* Date et heure inputs */
+.date-time-inputs {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.date-field, .time-field {
+  flex: 1 1 45%;
+}
+
+/* Liste des dates sous forme de chips */
+.date-chips {
+  margin-top: 1rem;
+}
+
+/* Actions (Annuler / Enregistrer) */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Sidebar toggle (menu bouton) */
+.sidebar-toggle {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: white;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .add-service-container {
+    padding: 1rem;
+  }
+  
+  .date-time-inputs {
+    flex-direction: column;
+  }
+
+  .sidebar-toggle {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+
+  .image-preview-container {
+    width: 180px;
+    height: 180px;
+  }
+}
+.icon-preview-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.preview-icon {
+  font-size: 32px;
+  color: #0b4184;
+  transition: transform 0.2s;
+}
+
+.preview-icon:hover {
+  transform: scale(1.2);
+}
+
+.icon-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.icon-suggestions button i {
+  font-size: 18px;
+}
+.gallery-preview {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.gallery-thumb {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}

@@ -1,0 +1,87 @@
+.category-buttons {
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.category-buttons button {
+  flex-shrink: 0;
+  min-width: fit-content;
+  white-space: nowrap;
+}
+
+.services-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px;
+  scroll-behavior: smooth;
+}
+
+.service-card {
+  min-width: 350px;
+  max-width: 350px;
+  height: 400px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.service-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-body h5 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #1a237e;
+}
+
+.card-body p {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #1976d2;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+  height: 50px;
+  width: 70px;
+}
+
+.floating-btn:hover {
+  transform: scale(1.05);
+}
+
+.no-service-msg {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin: 20px;
+}

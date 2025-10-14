@@ -1,0 +1,61 @@
+.newsletter-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-height: 100vh;
+}
+
+/* Titre */
+.newsletter-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #0d47a1;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Sélection des emails */
+.email-selection {
+  margin-bottom: 2rem;
+}
+
+.email-selection h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #0d47a1;
+}
+
+/* Liste des emails */
+.email-selection div {
+  margin-bottom: 0.5rem;
+}
+
+/* Checkbox des emails */
+.email-selection input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Mat form fields */
+.full-width {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+/* Bouton envoyer */
+button[type="submit"] {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .newsletter-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,57 @@
+<div class="collab-page">
+  <h2>Nos Collaborations</h2>
+
+  <!-- Liste des collabs -->
+  <div class="collab-grid">
+    <div class="collab-card" *ngFor="let c of collaborations; let i = index">
+      <img [src]="c.logo" alt="{{c.nom}}">
+      <p>{{c.nom}}</p>
+      <div class="actions">
+        <button class="edit-btn" (click)="editCollab(i)">✏️</button>
+        <button class="delete-btn" (click)="confirmDelete(i)">🗑️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton + -->
+  <button class="add-btn" (click)="showForm = !showForm; editingIndex = null; newCollab={nom:'',logo:'',description:'',gallery:[]}">+</button>
+
+  <!-- Formulaire -->
+  <div *ngIf="showForm" class="form-card">
+    <h3 *ngIf="editingIndex === null">Ajouter Collaboration</h3>
+    <h3 *ngIf="editingIndex !== null">Modifier Collaboration</h3>
+    
+    <!-- Nom -->
+    <label>Nom :</label>
+    <input type="text" [(ngModel)]="newCollab.nom">
+
+    <!-- Logo -->
+    <label>Logo :</label>
+    <input type="file" (change)="onFileSelected($event)">
+    <img *ngIf="newCollab.logo" [src]="newCollab.logo" alt="preview" style="max-width:100px; margin-top:10px;">
+
+    <!-- Description -->
+    <label>Description :</label>
+    <textarea [(ngModel)]="newCollab.description" rows="3"></textarea>
+
+    <!-- Gallery -->
+    <label>Galerie (images/vidéos) :</label>
+    <input type="file" multiple (change)="onGallerySelected($event)">
+
+    <div class="preview-gallery" *ngIf="newCollab.gallery && newCollab.gallery.length">
+      <div *ngFor="let media of newCollab.gallery" class="preview-item">
+        <ng-container *ngIf="media.includes('video'); else imgTpl">
+          <video [src]="media" controls width="120"></video>
+        </ng-container>
+        <ng-template #imgTpl>
+          <img [src]="media" alt="gallery preview" width="100">
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Bouton submit -->
+    <button (click)="addCollab()">
+      {{ editingIndex === null ? 'Ajouter' : 'Mettre à jour' }}
+    </button>
+  </div>
+</div>

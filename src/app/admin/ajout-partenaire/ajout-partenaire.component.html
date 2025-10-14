@@ -1,0 +1,40 @@
+<div class="main-content">
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center main-title">Créer un partenaire</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="partner-form">
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nom</mat-label>
+          <input matInput placeholder="Nom du partenaire" formControlName="nom" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="xyz@gmail.com" formControlName="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Matricule Fiscale</mat-label>
+          <input matInput placeholder="MF123456" formControlName="matriculefiscale" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Téléphone</mat-label>
+          <input matInput type="tel" placeholder="8 numéro" formControlName="telephone" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" placeholder="plusieurs caractéres" formControlName="motdepasse" required>
+        </mat-form-field>
+      </div>
+
+      <div class="text-center mt-4">
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+          Créer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

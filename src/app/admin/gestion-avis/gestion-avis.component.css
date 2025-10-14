@@ -1,0 +1,128 @@
+.gestion-avis-container {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Chaque bloc produit / événement */
+.avis-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+/* Colonne gauche */
+.left {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image principale */
+.main-image {
+  max-width: 280px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+/* Colonne droite */
+.right {
+  flex: 2 1 500px;
+}
+
+/* Titre produit / événement */
+.right h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0d47a1;
+  margin-bottom: 1rem;
+}
+
+/* Description */
+.right p {
+  margin: 0.5rem 0;
+}
+
+/* Section des avis */
+.avis-section {
+  margin-top: 2rem;
+}
+
+.avis-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #0d47a1;
+}
+
+/* Ligne avis */
+.review-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eef3f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Partie étoiles */
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+/* Avis vide */
+.no-review {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .avis-wrapper {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  
+  .left, .right {
+    flex: 1 1 100%;
+  }
+  
+  .main-image {
+    max-width: 100%;
+  }
+}
+.media-gallery-section {
+  margin-top: 30px;
+}
+
+.media-gallery {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.media-card {
+  width: 200px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.media-card img,
+.media-card video {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}

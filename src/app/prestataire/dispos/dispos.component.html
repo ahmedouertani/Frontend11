@@ -1,0 +1,25 @@
+<div class="dispo-container">
+  <h2>📆 Disponibilité Prestataire</h2>
+
+  <div class="month-navigation">
+    <button mat-icon-button (click)="prevMonth()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <span>{{ currentDate | date:'MMMM yyyy' }}</span>
+    <button mat-icon-button (click)="nextMonth()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <div class="grid">
+    <div *ngFor="let d of timeGrid" class="cell" 
+         [class.selected]="isSelected(d)" 
+         (click)="toggle(d)">
+      {{ d | date:'dd/MM HH:mm' }}
+    </div>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="save()">
+    💾 Enregistrer
+  </button>
+</div>

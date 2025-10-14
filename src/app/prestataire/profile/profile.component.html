@@ -1,0 +1,77 @@
+<div class="profile-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Mon Profil</mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <div *ngIf="isLoading" class="loading-overlay">
+          <mat-spinner diameter="50"></mat-spinner>
+        </div>
+  
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <!-- Aperçu de l'image -->
+          <div class="image-upload-container">
+            <div class="image-preview" *ngIf="previewUrl">
+              <img [src]="previewUrl" alt="Photo de profil">
+              <button mat-icon-button type="button" class="remove-image" (click)="previewUrl = null; selectedFile = null">
+                <mat-icon>close</mat-icon>
+              </button>
+              
+            </div>
+            
+            <!-- Bouton d'upload -->
+            <div class="upload-button">
+              <input type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" style="display: none;">
+              <button mat-stroked-button type="button" (click)="fileInput.click()">
+                <mat-icon>add_photo_alternate</mat-icon>
+                {{ previewUrl ? 'Changer' : 'Ajouter' }} une photo
+              </button>
+            </div>
+          </div>
+  
+          <!-- Champs du formulaire -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nom complet</mat-label>
+            <input matInput formControlName="nom" required>
+            <mat-error *ngIf="profileForm.get('nom')?.hasError('required')">
+              Le nom est obligatoire
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" required>
+            <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+              L'email est obligatoire
+            </mat-error>
+            <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+              Veuillez entrer un email valide
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Numéro Téléphone</mat-label>
+            <input matInput formControlName="telephone" required>
+            <mat-error *ngIf="profileForm.get('telephone')?.hasError('required')">
+              Le Numéro Téléphone est obligatoire
+            </mat-error>
+          </mat-form-field>
+  
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nouveau mot de passe</mat-label>
+            <input matInput formControlName="motdepasse" type="password">
+            <mat-hint>Laissez vide pour ne pas changer</mat-hint>
+          </mat-form-field>
+  
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="isLoading || profileForm.invalid">
+              <span *ngIf="!isLoading">Enregistrer</span>
+              <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

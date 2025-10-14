@@ -1,0 +1,134 @@
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #cead57; /* 👈 doré */
+    margin-bottom: 20px;
+  }
+  
+  .text-gold {
+    color: #cead57 !important; /* 👈 pour les sous-titres, titres ou accents */
+  }
+  
+  .contact-info-modern i {
+    font-size: 1.5rem;
+    color: #cead57;
+    margin-right: 0.5rem;
+  }
+  
+  .social-icons-modern a {
+    display: inline-block;
+    margin-right: 12px;
+    font-size: 1.3rem;
+    color: #cead57;
+    transition: transform 0.3s, color 0.3s;
+  }
+  
+  .social-icons-modern a:hover {
+    color: #b9973c;
+    transform: scale(1.2);
+  }
+  
+  .btn-tansi {
+    background: linear-gradient(to right, #cead57, #b9973c);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    padding: 0.7rem 2rem;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-tansi:hover {
+    background: linear-gradient(to right, #b9973c, #cead57);
+  }
+  @media (max-width: 992px) {
+    .contact-hero {
+      padding: 40px 20px;
+    }
+  
+    .contact-title {
+      font-size: 2.2rem;
+      text-align: center;
+      color: #cead57;
+    }
+  
+    .contact-info-modern {
+      margin-top: 30px;
+    }
+  
+    .btn-tansi {
+      width: 100%;
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .contact-title {
+      font-size: 1.9rem;
+      text-align: center;
+    }
+  
+    .modern-input {
+      font-size: 0.95rem;
+      padding: 0.6rem 1rem;
+    }
+  
+    .btn-tansi {
+      padding: 0.6rem 1.2rem;
+      width: 100%;
+    }
+  
+    .social-icons-modern {
+      text-align: center;
+      font-size: 1.2rem;
+    }
+  
+    .contact-info-modern {
+      padding: 1.5rem;
+      box-shadow: none;
+    }
+  
+    .contact-info-modern i {
+      font-size: 1.4rem;
+      color: #cead57;
+    }
+  
+    .map-responsive {
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .contact-hero {
+      padding: 30px 10px;
+    }
+  
+    .contact-title {
+      font-size: 1.7rem;
+    }
+  
+    .modern-input {
+      padding: 0.5rem 0.9rem;
+    }
+  
+    .contact-info-modern p,
+    .contact-info-modern h5,
+    .contact-info-modern h6 {
+      font-size: 0.95rem;
+      text-align: center;
+    }
+  
+    .map-responsive iframe {
+      height: 200px;
+    }
+  
+    .footer-logo {
+      width: 100px;
+      height: auto;
+    }
+  
+    .social-icons-modern a {
+      font-size: 1.1rem;
+    }
+  }
+  

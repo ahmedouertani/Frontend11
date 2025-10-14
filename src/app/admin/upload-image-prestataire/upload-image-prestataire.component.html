@@ -1,0 +1,14 @@
+<div class="container">
+    <h2>Uploader une image pour ce prestataire</h2>
+  
+    <input type="file" (change)="onFileSelected($event)">
+    <button mat-raised-button color="primary" (click)="upload()">Uploader</button>
+  
+    <h3 style="margin-top: 30px;">Galerie du prestataire</h3>
+    <div class="gallery">
+      <div class="image-card" *ngFor="let img of images">
+        <img [src]="img.imageUrl" alt="Image">
+      </div>
+    </div>
+  </div>
+  

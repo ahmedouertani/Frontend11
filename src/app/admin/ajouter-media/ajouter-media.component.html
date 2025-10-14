@@ -1,0 +1,16 @@
+<div class="media-upload-container">
+    <h2>Ajouter des images et vidéos</h2>
+  
+    <div class="form-group">
+      <label for="images">Choisir des images :</label>
+      <input type="file" id="images" (change)="onImagesSelected($event)" multiple accept="image/*">
+    </div>
+  
+    <div class="form-group">
+      <label for="videos">Choisir des vidéos :</label>
+      <input type="file" id="videos" (change)="onVideosSelected($event)" multiple accept="video/*">
+    </div>
+  
+    <button (click)="uploadMedia()">Uploader les fichiers</button>
+  </div>
+  

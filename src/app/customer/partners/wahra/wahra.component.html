@@ -1,0 +1,40 @@
+<div class="cheers-page container py-5">
+    <!-- Logo + Titre -->
+    <div class="text-center mb-5">
+      <img src="assets/partenaires/logowahra.webp" alt="Logo Wahra" class="cheers-logo" />
+      <h2 class="cheers-title mt-3">Wahra - Maison d'événements</h2>
+      <p class="cheers-description">
+        Pour Wahra, nous avons conçu une série de visuels créatifs pour renforcer leur identité visuelle et attirer un public fidèle. L’objectif était de valoriser leur positionnement élégant et unique dans le monde de l'événementiel.
+      </p>
+    </div>
+  
+    <!-- ================= DESIGN GRAPHIQUE ================= -->
+    <section class="cheers-section">
+      <h2 class="cheers-title">Design Graphique</h2>
+      <div class="cheers-gallery">
+        <img src="assets/partenaires/wahra/affiche1.webp" alt="Affiche 1" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche2.webp" alt="Affiche 2" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche3.webp" alt="Affiche 3" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche4.webp" alt="Affiche 4" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche5.webp" alt="Affiche 5" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche6.webp" alt="Affiche 6" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche7.webp" alt="Affiche 7" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche8.webp" alt="Affiche 8" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche9.webp" alt="Affiche 9" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche10.webp" alt="Affiche 10" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche11.webp" alt="Affiche 11" class="cheers-poster" />
+        <img src="assets/partenaires/wahra/affiche12.webp" alt="Affiche 12" class="cheers-poster" />
+      </div>
+      <div id="lightbox" class="lightbox" (click)="closeLightbox()" *ngIf="showLightbox">
+        <img [src]="lightboxImage" alt="image agrandie">
+      </div>
+    </section>
+  
+    <!-- Bouton de retour -->
+    <div class="back-to-clients">
+      <a [routerLink]="['/customer/tansikprod']" fragment="clients">
+        <i class="fas fa-arrow-left"></i> Retour aux clients
+      </a>
+    </div>
+  </div>
+  
