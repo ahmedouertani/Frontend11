@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 const TOKEN = 'ecom-token';
 const USER = 'ecom-user';
@@ -7,36 +8,38 @@ const USER = 'ecom-user';
   providedIn: 'root'
 })
 export class UserStorageService {
+  private static platformId: any;
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    UserStorageService.platformId = platformId;
+  }
 
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+  private static isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
   }
 
   public saveToken(token: string): void {
+    if (!UserStorageService.isBrowser()) return;
     window.localStorage.removeItem(TOKEN);
     window.localStorage.setItem(TOKEN, token);
   }
-  
-  public saveUser(user): void {
+
+  public saveUser(user: any): void {
+    if (!UserStorageService.isBrowser()) return;
     window.localStorage.removeItem(USER);
     window.localStorage.setItem(USER, JSON.stringify(user));
   }
-  
 
-  static getToken(): string {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      return localStorage.getItem(TOKEN);
-    }
-    return null; // Retourne null si l'accès à localStorage échoue
+
+  static getToken(): string | null {
+    if (!this.isBrowser()) return null;
+    return localStorage.getItem(TOKEN);
   }
-  static getUser() {
-    if (typeof window !== 'undefined') {
-      const userStr = localStorage.getItem(USER);
-          return userStr ? JSON.parse(userStr) : null;
-    }
-    return null;
+
+  static getUser(): any {
+    if (!this.isBrowser()) return null;
+    const userStr = localStorage.getItem(USER);
+    return userStr ? JSON.parse(userStr) : null;
   }
 
   static getUserId(): string {
@@ -50,57 +53,53 @@ export class UserStorageService {
   static getUserRole(): string {
     const user = this.getUser();
     if (!user) {
-      return ''; // Retourne une chaîne vide si l'utilisateur n'est pas trouvé
+      return '';
     }
     return user.role;
   }
-  
+
 
   static isAdminLoggedIn(): boolean {
+    if (!this.isBrowser()) return false;
     const token = this.getToken();
     if (!token) {
       return false;
     }
     const user = this.getUser();
     if (user === null) {
-      console.log('Aucun utilisateur trouvé');
       return false;
     }
-    console.log('Rôle utilisateur (admin):', user.role);  // Log du rôle de l'utilisateur
     return user.role === 'ADMIN';
   }
-  
+
   static isCustomerLoggedIn(): boolean {
+    if (!this.isBrowser()) return false;
     const token = this.getToken();
     if (!token) {
       return false;
     }
     const user = this.getUser();
-    if (user ===null) {
-      console.log('Aucun utilisateur trouvé');
+    if (user === null) {
       return false;
     }
-    console.log('Rôle utilisateur (client):', user.role);  // Log du rôle de l'utilisateur
     return user.role === 'CLIENT';
   }
-  
+
 
   static signOut(): void {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.removeItem(TOKEN);
-      window.localStorage.removeItem(USER);
-      
-    }
+    if (!this.isBrowser()) return;
+    window.localStorage.removeItem(TOKEN);
+    window.localStorage.removeItem(USER);
   }
 
 
   static isPrestataireLoggedIn(): boolean {
+    if (!this.isBrowser()) return false;
     const token = this.getToken();
     if (!token) return false;
     const user = this.getUser();
     if (!user) return false;
-    console.log('Rôle utilisateur (prestataire) :', user.role);
     return user.role === 'PRESTATAIRE';
   }
-  
+
 }

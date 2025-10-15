@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserStorageService } from './services/storage/user-storage.service';
 import { CustomerService } from './customer/services/customer.service';
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from './admin/service/admin.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +44,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     private adminService: AdminService,
     private fb: FormBuilder,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.form = this.fb.group({
       email: ['', [
@@ -64,7 +66,7 @@ export class AppComponent implements OnInit {
     this.searchForm.reset();
     this.filteredServices = []; // Facultatif : vider les suggestions aussi
   }
-  
+
   ngOnInit(): void {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -117,10 +119,12 @@ export class AppComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
+    if (!isPlatformBrowser(this.platformId)) return;
     this.showScrollTop = window.scrollY > 300;
   }
 
   scrollToTop(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   onSubmit() {
@@ -218,8 +222,8 @@ export class AppComponent implements OnInit {
   navigateToService(service: any): void {
     if (!service?.id) return;
 
-    const route = service.afficherDans === 'events' 
-      ? ['customer/event', service.id] 
+    const route = service.afficherDans === 'events'
+      ? ['customer/event', service.id]
       : ['customer/service', service.id];
 
     this.router.navigate(route)

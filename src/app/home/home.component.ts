@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 import { CustomerService } from '../customer/services/customer.service';
 import { AdminService } from '../admin/service/admin.service';
 import { CollabService, Collab } from '../services/collab.service';
+import { SeoService } from '../services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -55,14 +55,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   ];
 
-  // ------- SEO -------
-  private siteName = 'Tansik Group';
-  private baseUrl = 'https://www.tansik.tn'; // ⚠️ mets ton domaine prod
-  private pagePath = '/';
-  private pageTitle = 'Agence marketing & événementiel à Tunis | Tansik Group';
-  private pageDescription = 'Tansik Group réunit Tansik Prod (marketing, design, sites, réseaux sociaux) et Tansik Events (organisation d’événements). Des services sur mesure, créatifs et efficaces.';
-  private pageImage = this.baseUrl + '/assets/marketing.webp'; // idéal 1200x630
-
   constructor(
     private customerService: CustomerService,
     private fb: FormBuilder,
@@ -71,28 +63,30 @@ export class HomeComponent implements OnInit, OnDestroy {
     private router: Router,
     private adminService: AdminService,
     private collabService: CollabService,
-    private title: Title,
-    private meta: Meta,
-    @Inject(DOCUMENT) private document: Document
+    private seoService: SeoService,
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   // ================== CYCLE DE VIE ==================
   ngOnInit(): void {
-    // Motion settings
-    this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (this.isReducedMotion) this.autoSlideDelay = 0;
+    // SEO - Do this first for SSR
+    this.initializeSeo();
+
+    // Only run browser-specific code in browser
+    if (isPlatformBrowser(this.platformId)) {
+      // Motion settings
+      this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (this.isReducedMotion) this.autoSlideDelay = 0;
+
+      if (!this.isReducedMotion) this.startAutoSlide();
+
+      // IO pour animations d'apparition
+      this.observeAppear();
+    }
 
     this.loadData();
     this.loadCollabs();
-    if (!this.isReducedMotion) this.startAutoSlide();
-
-    // SEO initial
-    this.setSeoTags();
-    this.setCanonical();
-    this.injectJsonLd();
-
-    // IO pour animations d’apparition
-    this.observeAppear();
   }
 
   ngOnDestroy(): void {
@@ -146,12 +140,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // ================== SLIDER ==================
   startAutoSlide(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (this.autoSlideDelay <= 0) return;
     this.stopAutoSlide();
     this.intervalId = setInterval(() => this.next(), this.autoSlideDelay);
   }
 
   stopAutoSlide(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;
@@ -171,16 +167,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   goToSlide(index: number): void {
     this.currentIndex = index;
     this.updateSliderPosition();
-    if (!this.isReducedMotion) this.startAutoSlide();
+    if (!this.isReducedMotion && isPlatformBrowser(this.platformId)) {
+      this.startAutoSlide();
+    }
   }
 
   handleButtonClick(direction: 'prev' | 'next'): void {
-    if (!this.isReducedMotion) this.stopAutoSlide();
+    if (!this.isReducedMotion && isPlatformBrowser(this.platformId)) {
+      this.stopAutoSlide();
+    }
     direction === 'prev' ? this.prev() : this.next();
-    if (!this.isReducedMotion) this.startAutoSlide();
+    if (!this.isReducedMotion && isPlatformBrowser(this.platformId)) {
+      this.startAutoSlide();
+    }
   }
 
   private updateSliderPosition(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     const slider = this.document.querySelector('.slider') as HTMLElement;
     if (slider) {
       slider.style.transform = `translateX(-${this.currentIndex * 100}%)`;
@@ -206,96 +209,58 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   // ================== SEO ==================
-  private setSeoTags(): void {
-    this.title.setTitle(this.pageTitle);
-
-    this.meta.updateTag({ name: 'description', content: this.pageDescription });
-    this.meta.updateTag({ name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' });
-    this.meta.updateTag({ name: 'keywords', content: 'marketing, événementiel, agence, Tunis, social media, design, site web, Tansik' });
-
-    // Open Graph
-    this.meta.updateTag({ property: 'og:type', content: 'website' });
-    this.meta.updateTag({ property: 'og:site_name', content: this.siteName });
-    this.meta.updateTag({ property: 'og:title', content: this.pageTitle });
-    this.meta.updateTag({ property: 'og:description', content: this.pageDescription });
-    this.meta.updateTag({ property: 'og:url', content: this.baseUrl + this.pagePath });
-    this.meta.updateTag({ property: 'og:image', content: this.pageImage });
-
-    // Twitter
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.meta.updateTag({ name: 'twitter:title', content: this.pageTitle });
-    this.meta.updateTag({ name: 'twitter:description', content: this.pageDescription });
-    this.meta.updateTag({ name: 'twitter:image', content: this.pageImage });
-  }
-
-  private setCanonical(): void {
-    const head = this.document.head;
-    const existing = head.querySelector('link[rel="canonical"]');
-    if (existing) existing.remove();
-
-    const link: HTMLLinkElement = this.document.createElement('link');
-    link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', this.baseUrl + this.pagePath);
-    head.appendChild(link);
-  }
-
-  private injectJsonLd(): void {
-    const head = this.document.head;
-    head.querySelectorAll('script[type="application/ld+json"].home-jsonld').forEach(s => s.remove());
-
-    const org = {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: 'Tansik Group',
-      url: this.baseUrl,
-      logo: this.baseUrl + '/assets/logogroup.webp',
-      sameAs: [
-        'https://www.facebook.com/tansik.production?locale=fr_FR',
-        'https://www.instagram.com/tansik_prod/?hl=fr'
-      ],
-      department: [
-        { '@type': 'Organization', name: 'Tansik Prod', url: this.baseUrl + '/customer/tansikprod', logo: this.baseUrl + '/assets/logoprod.webp' },
-        { '@type': 'Organization', name: 'Tansik Events', url: this.baseUrl + '/customer/tansikevents', logo: this.baseUrl + '/assets/logoevents.webp' }
-      ]
-    };
-
-    const website = {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: this.siteName,
-      url: this.baseUrl,
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: this.baseUrl + '/recherche?q={search_term_string}',
-        'query-input': 'required name=search_term_string'
-      }
-    };
-
-    const itemList = {
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'Nos services',
-      itemListElement: this.categoriesProd?.map((cat: any, idx: number) => ({
-        '@type': 'ListItem', position: idx + 1,
-        url: this.baseUrl + '/customer/tansikprod#' + cat.id, name: cat.name
-      })) || []
-    };
-
-    [org, website, itemList].forEach(json => {
-      const script = this.document.createElement('script');
-      script.type = 'application/ld+json';
-      script.classList.add('home-jsonld');
-      script.text = JSON.stringify(json);
-      head.appendChild(script);
+  private initializeSeo(): void {
+    // Update meta tags
+    this.seoService.updateSeoTags({
+      title: 'Agence marketing & événementiel à Tunis',
+      description: 'Tansik Group réunit Tansik Prod (marketing, design, sites, réseaux sociaux) et Tansik Events (organisation d\'événements). Des services sur mesure, créatifs et efficaces.',
+      keywords: 'marketing, événementiel, agence, Tunis, social media, design, site web, Tansik, mariage, séminaire, inauguration',
+      image: '/assets/marketing.webp',
+      type: 'website'
     });
+
+    // Add structured data
+    this.seoService.addOrganizationSchema();
+    this.seoService.addWebsiteSchema();
   }
 
   private refreshJsonLd(): void {
-    this.injectJsonLd();
+    // Add service list schema when categories are loaded
+    if (this.categoriesProd && this.categoriesProd.length > 0) {
+      const itemListSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Nos services marketing',
+        itemListElement: this.categoriesProd.map((cat: any, idx: number) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          url: 'https://www.tansik.tn/customer/tansikprod#' + cat.id,
+          name: cat.name
+        }))
+      };
+      this.seoService.addJsonLd(itemListSchema, 'services-list-schema');
+    }
+
+    if (this.categoriesEvents && this.categoriesEvents.length > 0) {
+      const eventListSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Nos services événementiels',
+        itemListElement: this.categoriesEvents.map((cat: any, idx: number) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          url: 'https://www.tansik.tn/customer/tansikevents#' + cat.id,
+          name: cat.name
+        }))
+      };
+      this.seoService.addJsonLd(eventListSchema, 'events-list-schema');
+    }
   }
 
-  // ================== ANIMATIONS D’APPARITION ==================
+  // ================== ANIMATIONS D'APPARITION ==================
   private observeAppear(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {

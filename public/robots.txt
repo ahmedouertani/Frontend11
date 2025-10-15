@@ -1,0 +1,48 @@
+# Tansik Group - Robots.txt
+# Updated: 2025-10-15
+
+User-agent: *
+Allow: /
+
+# Disallow admin and user-specific areas
+Disallow: /admin/
+Disallow: /customer/dashboard
+Disallow: /customer/my-orders
+Disallow: /customer/my-wishlist
+Disallow: /customer/cart
+Disallow: /customer/place-order
+Disallow: /customer/place-order-events
+Disallow: /prestataire/
+Disallow: /logins
+
+# Allow public customer pages
+Allow: /customer/tansikprod
+Allow: /customer/tansikevents
+Allow: /customer/service/
+Allow: /customer/event/
+Allow: /customer/promotions
+Allow: /customer/partners
+
+# Block API endpoints
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.tansik.tn/sitemap.xml
+
+# Crawl delay for non-Google bots
+User-agent: *
+Crawl-delay: 1
+
+# Google bots - no restrictions
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Googlebot-Mobile
+Crawl-delay: 0
+
+# Facebook crawler
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter crawler
+User-agent: Twitterbot
+Allow: /
