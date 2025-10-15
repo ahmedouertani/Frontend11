@@ -25,7 +25,7 @@ import { AuthService } from '../../../services/auth/auth.service';
     isProdSelected = true;
     showSidebar = false;
 
-    
+
 
 
     constructor(
@@ -36,7 +36,7 @@ import { AuthService } from '../../../services/auth/auth.service';
       private authService: AuthService,
       private snackbar: MatSnackBar
     ) {}
-  
+
     ngOnInit(): void {
       this.serviceId = +this.route.snapshot.params['serviceId']; // Ensure serviceId is a number
       this.initForm();
@@ -47,7 +47,7 @@ import { AuthService } from '../../../services/auth/auth.service';
     private filterCategories(): void {
       const type = this.productForm.get('afficherDans')?.value;
       this.filteredCategories = this.allCategories.filter(cat => cat.type === type);
-    
+
       // ✅ Réinitialise la catégorie si elle ne correspond plus
       const selectedCatId = this.productForm.get('categoryId')?.value;
       const isStillValid = this.filteredCategories.some(cat => cat.id === selectedCatId);
@@ -55,7 +55,7 @@ import { AuthService } from '../../../services/auth/auth.service';
         this.productForm.get('categoryId')?.reset();
       }
     }
-    
+
     private initForm(): void {
       this.productForm = this.fb.group({
         nom: [null, Validators.required],
@@ -66,10 +66,10 @@ import { AuthService } from '../../../services/auth/auth.service';
         prestataireId: [null],
         unavailableDates: [[]]
       });
-    
+
       // Initialiser l'état prod/events
       this.isProdSelected = this.productForm.get('afficherDans')?.value === 'prod';
-    
+
       // Validators dynamiques + filtrage des catégories
       this.productForm.get('afficherDans')?.valueChanges.subscribe(type => {
         this.isProdSelected = type === 'prod';
@@ -77,12 +77,12 @@ import { AuthService } from '../../../services/auth/auth.service';
         this.filterCategories();         // filtrer les catégories dynamiquement
       });
     }
-    
-  
+
+
     private updateFormValidators(): void {
       const prixControl = this.productForm.get('prix');
       const prestataireControl = this.productForm.get('prestataireId');
-  
+
       if (this.isProdSelected) {
         prixControl?.clearValidators();
         prestataireControl?.clearValidators();
@@ -90,11 +90,11 @@ import { AuthService } from '../../../services/auth/auth.service';
         prixControl?.setValidators([Validators.required, Validators.min(0)]);
         prestataireControl?.setValidators([Validators.required]);
       }
-  
+
       prixControl?.updateValueAndValidity();
       prestataireControl?.updateValueAndValidity();
     }
-  
+
     loadCategories(): void {
       this.adminService.getAllCategory().subscribe({
         next: (res) => {
@@ -107,8 +107,8 @@ import { AuthService } from '../../../services/auth/auth.service';
         }
       });
     }
-    
-  
+
+
     loadPrestataires(): void {
       this.authService.getAllPrestataires().subscribe({
         next: (res) => {
@@ -121,16 +121,16 @@ import { AuthService } from '../../../services/auth/auth.service';
         }
       });
     }
-  
+
     loadServiceDetails(): void {
       this.adminService.getServiceById(this.serviceId).subscribe({
         next: (service) => {
           console.log('📦 Service details loaded:', service);
-    
+
           // Détection du type
           const type = service.afficherDans || 'prod';
           this.isProdSelected = type === 'prod';
-    
+
           // Patch des valeurs dans le formulaire
           this.productForm.patchValue({
             nom: service.nom || service.name,
@@ -140,23 +140,23 @@ import { AuthService } from '../../../services/auth/auth.service';
             prix: service.prix,
             prestataireId: service.prestataireId
           });
-    
+
           // Image preview
           if (service.base64Img) {
             this.existingImage = 'data:image/jpeg;base64,' + service.base64Img;
           } else if (service.returnedImg) {
             this.existingImage = 'data:image/jpeg;base64,' + service.returnedImg;
           }
-    
+
           // Dates d'indisponibilité (si events)
           this.unavailableDates = (service.unavailableDateTimes || service.unavailableDates || [])
             .map((d: string) => new Date(d))
             .filter((d: Date) => !isNaN(d.getTime())); // filtre les dates invalides
-    
+
           // Appliquer validation dynamique & filtrage des catégories
           this.updateFormValidators();
           this.filterCategories();
-    
+
         },
         error: (err) => {
           console.error('❌ Erreur chargement service :', err);
@@ -165,67 +165,140 @@ import { AuthService } from '../../../services/auth/auth.service';
         }
       });
     }
-    
-  
-    onFileSelected(event: any): void {
-      const file = event.target.files[0];
-      if (file) {
-        this.file = file;
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.imagePreview = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
+
+
+  async onFileSelected(event: any): Promise<void> {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.type.match('image.*')) {
+      this.snackbar.open('Seules les images sont acceptées', 'Fermer', { duration: 3000 });
+      return;
     }
-  
-    onDateChange(date: Date): void {
+
+    try {
+      // Compress image if larger than 1MB
+      if (file.size > 1048576) { // 1MB in bytes
+        this.snackbar.open('Compression de l\'image...', 'Fermer', { duration: 2000 });
+        this.file = await this.compressImage(file);
+        console.log('Image compressée:', this.file.size, 'bytes');
+      } else {
+        this.file = file;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreview = e.target.result;
+      };
+      reader.readAsDataURL(this.file);
+    } catch (error) {
+      this.snackbar.open('Erreur lors de la compression de l\'image', 'Fermer', { duration: 3000 });
+      console.error('Compression error:', error);
+    }
+  }
+
+  private compressImage(file: File): Promise<File> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event: any) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 1024;
+          const MAX_HEIGHT = 1024;
+          let width = img.width;
+          let height = img.height;
+
+          // Calculate new dimensions while maintaining aspect ratio
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height = height * (MAX_WIDTH / width);
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width = width * (MAX_HEIGHT / height);
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+          }
+
+          // Convert canvas to blob with compression quality
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                const compressedFile = new File([blob], file.name, {
+                  type: 'image/jpeg',
+                  lastModified: Date.now()
+                });
+                resolve(compressedFile);
+              } else {
+                reject(new Error('Canvas to Blob conversion failed'));
+              }
+            },
+            'image/jpeg',
+            0.7 // Compression quality (0-1)
+          );
+        };
+        img.onerror = () => reject(new Error('Image load failed'));
+      };
+      reader.onerror = () => reject(new Error('File read failed'));
+    });
+  }    onDateChange(date: Date): void {
       this.selectedDate = date;
     }
-  
+
     addDateTime(timeInput: HTMLInputElement): void {
       if (!this.selectedDate || !timeInput.value) return;
-  
+
       const [hours, minutes] = timeInput.value.split(':').map(Number);
       const dateTime = new Date(this.selectedDate);
       dateTime.setHours(hours, minutes);
-  
+
       if (!this.unavailableDates.some(d => d.getTime() === dateTime.getTime())) {
         this.unavailableDates.push(dateTime);
         timeInput.value = '';
         this.selectedDate = null;
       }
     }
-  
+
     removeDate(index: number): void {
       this.unavailableDates.splice(index, 1);
     }
     updateProduct(): void {
       if (this.productForm.invalid) return;
-    
+
       const formData = new FormData();
       const formValue = this.productForm.value;
-    
+
       formData.append('name', formValue.nom);
       formData.append('description', formValue.description);
       formData.append('categoryId', formValue.categoryId);
-    
+
       if (!this.isProdSelected) {
         formData.append('prix', formValue.prix);
         formData.append('prestataireId', formValue.prestataireId);
-    
+
 
           formData.append('unavailableDates', JSON.stringify(
             this.unavailableDates.map(d => this.formatDateTimeLocal(d))
           ));
-          
-        
+
+
       }
-    
+
       if (this.file) {
         formData.append('img', this.file);
       }
-    
+
       this.adminService.updateProduct(this.serviceId, formData, formValue.afficherDans).subscribe({
         next: () => {
           this.snackbar.open('Service mis à jour avec succès !', 'Fermer', { duration: 4000 });
@@ -241,8 +314,8 @@ import { AuthService } from '../../../services/auth/auth.service';
       const pad = (n: number) => n.toString().padStart(2, '0');
       return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:00`;
     }
-      
-  
+
+
     GoDashboard(): void {
       this.router.navigate(['/admin/dashboard']);
     }
